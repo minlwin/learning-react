@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .menu-item {
+    @apply block px-4 py-2 hover:bg-blue-100;
+  }
+
+  .menu-item-active {
+    @apply block px-4 py-2 bg-blue-800 text-white;
+  }
+
+  .outline-btn {
+    @apply block p-2 rounded border-2 border-solid border-red-900 hover:bg-red-100 w-full;
+  }
+}
