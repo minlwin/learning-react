@@ -5,10 +5,12 @@ import { usePathname } from "next/navigation"
 
 export default function SideBar() {
     return (
-        <nav className="h-full shadow-md w-1/5">
-            <Header title="Hello React" />
-            <MenuGroup />
-        </nav>
+        <div className="pt-4 ps-4 pb-4 h-full w-1/5">
+            <nav className="shadow-md h-full bg-white rounded-md">
+                <Header title="Hello React" />
+                <MenuGroup />
+            </nav>
+        </div>
     )
 }
 

@@ -4,6 +4,8 @@ import Card from "@/components/card"
 import PageTitle from "@/components/page-title"
 import { useState } from "react"
 import Form1 from "./form1"
+import Form2 from "./form2"
+import Form3 from "./form3"
 
 export default function UsingForm() {
     const [tab, setTab] = useState('form1')
@@ -24,8 +26,8 @@ export default function UsingForm() {
 
             <Card className="flex-grow">
                 {tab === 'form1' && <Form1 />}
-                {tab === 'form2' && <h1>Form 2</h1>}
-                {tab === 'form3' && <h1>Form 3</h1>}
+                {tab === 'form2' && <Form2 />}
+                {tab === 'form3' && <Form3 />}
             </Card>
         </div>
     )
