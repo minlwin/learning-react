@@ -40,5 +40,6 @@ body {
   .form-select {
     @apply w-full p-1 border-b-2 focus:outline-none border-solid border-red-800 bg-transparent;
     padding-bottom: 0.4rem !important;
+    padding-top: 0.4 rem !important;
   }
 }

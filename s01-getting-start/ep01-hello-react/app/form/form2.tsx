@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { FormModel } from "./form-model"
+import { FormModel } from "./models"
 import JsonViewer from "@/components/json-viewer"
 import FormGroup from "@/components/forms/form-group"
 
-export default function Form2() {
+export const Form2 = () => {
 
     const [model, setModel] = useState<FormModel>({text: "", date: "", select : ""})
     const [error, setError] = useState<Partial<FormModel>>({})
@@ -14,17 +14,9 @@ export default function Form2() {
 
     useEffect(() => {
         const errors:Partial<FormModel> = {}
-        if(!model.text) {
-            errors.text = "Please enter text input."
-        }
-
-        if(!model.date) {
-            errors.date = "Please select date input."
-        }
-
-        if(!model.select) {
-            errors.select = "Please select one item."            
-        }
+        errors.text = model.text ? "" : "Please enter text input."
+        errors.date = model.date ? "" : "Please select date input."
+        errors.select = model.select ? "" : "Please select one item."
         setError(errors)
     }, [model])
  

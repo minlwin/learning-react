@@ -3,9 +3,9 @@
 import Card from "@/components/card"
 import PageTitle from "@/components/page-title"
 import { useState } from "react"
-import Form1 from "./form1"
-import Form2 from "./form2"
-import Form3 from "./form3"
+import { Form1 } from "./form1"
+import { Form2 } from "./form2"
+import { Form3 } from "./form3"
 
 export default function UsingForm() {
     const [tab, setTab] = useState('form1')
@@ -21,7 +21,7 @@ export default function UsingForm() {
             <div className="flex flex-row mt-4 mb-4">
                 <TabButton id="form1" name="Form Input" onClick={nextTab} active={tab === 'form1'} />
                 <TabButton id="form2" name="Form Validation" onClick={nextTab} active={tab === 'form2'} />
-                <TabButton id="form3" name="Use Action State" onClick={nextTab} active={tab === 'form3'} />
+                <TabButton id="form3" name="Form and List" onClick={nextTab} active={tab === 'form3'} />
             </div>
 
             <Card className="flex-grow">

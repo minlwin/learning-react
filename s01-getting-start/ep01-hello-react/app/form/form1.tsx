@@ -1,11 +1,9 @@
-"use client"
-
 import FormGroup from "@/components/forms/form-group";
 import JsonViewer from "@/components/json-viewer";
 import { useState } from "react";
-import { FormModel } from "./form-model";
+import { FormModel } from "./models";
 
-export default function Form1() {
+export const Form1 = () => {
 
     const [model, setModel] = useState<FormModel>({text: "", date: "", select : ""})
 
