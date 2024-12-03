@@ -1,7 +1,10 @@
+"use client"
+
 import { useEffect, useState } from "react"
 import { User } from "./models"
 import { v4 as uuid } from "uuid"
 import FormGroup from "@/components/forms/form-group"
+import Card from "@/components/card"
 
 export const Form3 = () => {
 
@@ -13,12 +16,15 @@ export const Form3 = () => {
             <h1 className="text-xl">Form and List</h1>
     
             <div className="py-4">
-                <EditForm addUser={addUser}/>
+                <Card>
+                    <EditForm addUser={addUser}/>
+                </Card>
             </div>
-    
-            <h1 className="text-lg mb-3">User List</h1>
-    
-            <UserList list={users}/>
+
+            <Card>
+                <h1 className="text-lg mb-3">User List</h1>
+                <UserList list={users}/>
+            </Card>
         </>
     )
 }
@@ -94,7 +100,7 @@ const EditForm = ({addUser} : {addUser: (user:Partial<User>) => void}) => {
     )
 }
 
-const UserList = ({list}:{list:Partial<User>[]}) => (
+export const UserList = ({list}:{list:Partial<User>[]}) => (
     <table className="table table-fixed w-full border-2 border-collapse">
         <thead>
             <tr className="border-2 border-collapse">
@@ -106,7 +112,7 @@ const UserList = ({list}:{list:Partial<User>[]}) => (
             </tr>
         </thead>
         <tbody>
-            {list.map(user => <tr className="border-2 border-collapse">
+            {list.map(user => <tr key={user.id} className="border-2 border-collapse">
                 <td className="text-start p-2">{user.name}</td>
                 <td className="text-start p-2">{user.dob}</td>
                 <td className="text-start p-2">{user.gender}</td>
