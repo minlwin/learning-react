@@ -13,6 +13,8 @@ export default function EditUser () {
     const router = useRouter()
     const [user, setUser] = useState<Partial<User>>({})
     const [errors, setErrors] = useState<Partial<User>>({})
+    const [dirty, setDirty] = useState<boolean>(false)
+
     const hasError = errors.name || errors.dob || errors.gender || errors.phone || errors.email
 
     const setName = (value:string) => setUser(prev => ({...prev, name : value}))
@@ -22,14 +24,17 @@ export default function EditUser () {
     const setDob = (value:string) => setUser(prev => ({...prev, dob : value}))
     
     useEffect(() => {
-        console.log(user)
-        var validationError:Partial<User> = {}
-        validationError.name = user.name ? "" : "Please enter name."
-        validationError.phone = user.phone ? "" : "Please enter phone."
-        validationError.email = user.email ? "" : "Please enter email."
-        validationError.gender = user.gender ? "" : "Please select gender."
-        validationError.dob = user.dob ? "" : "Please enter date of birth."
-        setErrors(validationError)
+        if(dirty) {
+            var validationError:Partial<User> = {}
+            validationError.name = user.name ? "" : "Please enter name."
+            validationError.phone = user.phone ? "" : "Please enter phone."
+            validationError.email = user.email ? "" : "Please enter email."
+            validationError.gender = user.gender ? "" : "Please select gender."
+            validationError.dob = user.dob ? "" : "Please enter date of birth."
+            setErrors(validationError)
+        } else {
+            setDirty(true)
+        }
     }, [user]) 
     
     const context = useContext(UsersContext)
@@ -37,7 +42,7 @@ export default function EditUser () {
     const onSubmit = () => {
         if(!hasError) {
             context?.addUser({... user, id : uuid()})
-            router.push("/nested")
+            router.replace("/nested/list")
         }
     }
 

@@ -38,11 +38,13 @@ function MenuItem({menu, active} : MenuItemProp) {
 }
 
 function MenuGroup() {
-    var pathname = usePathname()
+    const pathname = usePathname()
+    const isActive = (url:string) => pathname === url || (url !== '/' && pathname.startsWith(url))
+
     return (
         <div className="py-4">
             <ul>
-                {routes.map((item, index) => <MenuItem key={index} menu={item} active={pathname === item.url} />)}
+                {routes.map((item, index) => <MenuItem key={index} menu={item} active={isActive(item.url)} />)}
             </ul>
         </div>
     )
