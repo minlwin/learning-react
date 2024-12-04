@@ -19,7 +19,7 @@ public class TownshipsApi {
 	private TownshipRepo repo;
 
 	@GetMapping("{district}")
-	List<Township> findByDistrictId(@PathVariable int district) {
-		return repo.findByDistrictId(district);
+	List<Township> findByDistrictId(@PathVariable(name = "district") int id) {
+		return repo.findByDistrictId(id);
 	}
 }

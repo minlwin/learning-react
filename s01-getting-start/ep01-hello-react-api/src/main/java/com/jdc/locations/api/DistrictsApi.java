@@ -19,7 +19,7 @@ public class DistrictsApi {
 	private DistrictRepo repo;
 
 	@GetMapping("{region}")
-	List<District> findByRegion(@PathVariable int region) {
-		return repo.findByRegionId(region);
+	List<District> findByRegion(@PathVariable(name = "region") int id) {
+		return repo.findByRegionId(id);
 	}
 }
