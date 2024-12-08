@@ -16,11 +16,11 @@ public class Registration {
 	private RegistrationPk id;
 	
 	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
+	@JoinColumn(name = "student_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private Student student;
 
 	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
+	@JoinColumn(name = "section_id", referencedColumnName = "id",insertable = false, updatable = false)
 	private Section section;
 	
 	private LocalDateTime registerAt;
