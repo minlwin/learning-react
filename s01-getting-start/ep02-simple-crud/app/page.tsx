@@ -1,9 +1,7 @@
-import Header from "@/components/header";
-
 export default function Page() {
   return (
     <>
-      <Header name="Simple CRUD" />
+      <h1 className="text-2xl">Simple CRUD</h1>
     </>
   )
 }

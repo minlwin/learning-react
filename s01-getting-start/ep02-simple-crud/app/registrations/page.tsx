@@ -1,9 +1,7 @@
-import Header from "@/components/header";
-
 export default function Page() {
   return (
     <>
-      <Header name="Registration History" />
-    </>
+      <h1 className="text-2xl">Registration Management</h1>
+      </>
   )
 }

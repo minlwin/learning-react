@@ -31,12 +31,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
 
-        <nav className="navbar navbar-start shadow-md w-full">
-          <div className="px-4 w-full flex justify-between">
-            <div className="flex p-0 m-0">
-              <HomeIcon className="w-6 me-2" />
-              Simple CRUD
-            </div>
+        <nav className="shadow-md w-full py-4">
+          <div className="px-8 w-full flex justify-between">
+            <a href="/" className="text-lg font-bold">Simple CRUD</a>
 
             <div className="flex justify-end">
               <MenuItem name="Registrations" href="registrations" icon={<CircleStackIcon className="w-6 me-2" />} />
@@ -48,7 +45,7 @@ export default function RootLayout({
 
         </nav>
 
-        <main className="px-6 pt-4">
+        <main className="px-8 pt-4">
           {children}
         </main>
       </body>
