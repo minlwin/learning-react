@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { BookOpenIcon, CalendarDateRangeIcon, CircleStackIcon, HeartIcon, HomeIcon, UsersIcon } from "@heroicons/react/16/solid";
+import MenuItem from "@/components/menu-item";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -28,7 +30,27 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+
+        <nav className="navbar navbar-start shadow-md w-full">
+          <div className="px-4 w-full flex justify-between">
+            <div className="flex p-0 m-0">
+              <HomeIcon className="w-6 me-2" />
+              Simple CRUD
+            </div>
+
+            <div className="flex justify-end">
+              <MenuItem name="Registrations" href="registrations" icon={<CircleStackIcon className="w-6 me-2" />} />
+              <MenuItem name="Students" href="students" icon={<UsersIcon className="w-6 me-2"/>} />
+              <MenuItem name="Classes" href="sections" icon={<CalendarDateRangeIcon className="w-6 me-2" />} />
+              <MenuItem name="Courses" href="courses" icon={<BookOpenIcon className="w-6 me-2" />} />
+            </div>
+          </div>
+
+        </nav>
+
+        <main className="px-6 pt-4">
+          {children}
+        </main>
       </body>
     </html>
   );
