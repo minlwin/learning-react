@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jdc.crud.api.input.StudentForm;
 import com.jdc.crud.api.input.StudentSearch;
 import com.jdc.crud.api.output.DataModificationResult;
+import com.jdc.crud.api.output.StudentDetails;
 import com.jdc.crud.api.output.StudentInfo;
 import com.jdc.crud.service.StudentService;
 
@@ -32,7 +33,7 @@ public class StudentApi {
 	}
 	
 	@GetMapping("{id}")
-	StudentSearch findById(@PathVariable int id) {
+	StudentDetails findById(@PathVariable int id) {
 		return service.findById(id);
 	}
 

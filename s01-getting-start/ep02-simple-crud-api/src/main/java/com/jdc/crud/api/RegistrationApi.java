@@ -44,7 +44,7 @@ public class RegistrationApi {
 	}
 
 	@PutMapping("{id}")
-	DataModificationResult<Integer> update(@PathVariable String id,
+	DataModificationResult<String> update(@PathVariable String id,
 			@Validated @RequestBody RegistrationForm form, BindingResult result) {
 		return service.update(id, form);
 	}
