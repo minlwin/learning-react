@@ -25,6 +25,12 @@ public class StudentService {
 	}
 
 	@Transactional
+	public DataModificationResult<Integer> create(StudentForm form) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Transactional
 	public DataModificationResult<Integer> update(int id, StudentForm form) {
 		// TODO Auto-generated method stub
 		return null;
