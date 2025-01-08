@@ -1,10 +1,13 @@
 package com.jdc.react.simple.domain.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Data
@@ -25,6 +28,9 @@ public class Course {
 	private int fees;
 	
 	private String description;
+	
+	@OneToMany(mappedBy = "course")
+	private List<Section> sections;
 	
 	public enum Level {
 		Basic, Intermediate, Advance

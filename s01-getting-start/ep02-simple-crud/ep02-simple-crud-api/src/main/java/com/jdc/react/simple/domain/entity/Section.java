@@ -1,9 +1,12 @@
 package com.jdc.react.simple.domain.entity;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
+import com.jdc.react.simple.domain.DaysConverter;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +26,7 @@ public class Section {
 	private Course course;
 	
 	@Column(nullable = false)
-	private LocalDateTime startAt;
+	private LocalDate startDate;
 	
 	@Column(nullable = false)
 	private Type type;
@@ -33,6 +36,7 @@ public class Section {
 	@Column(nullable = false)
 	private int months;
 	
+	@Convert(converter = DaysConverter.class)
 	@Column(nullable = false)
 	private DayOfWeek[] days;
 	
