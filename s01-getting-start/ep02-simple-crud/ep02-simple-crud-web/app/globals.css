@@ -19,3 +19,15 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+
+  .navbar-nav > li > a {
+    @apply inline-block h-full px-2
+  }
+
+  .navbar-nav > li > a.active {
+    @apply text-white
+  }
+
+}
