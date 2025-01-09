@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+
+  .navbar {
+    @apply bg-black py-4 px-16 text-gray-300 flex justify-between
+  }
+
+  .navbar-brand {
+    @apply text-yellow-100
+  }
+
+  .navbar .active {
+    @apply text-white
+  }
+
+  .navbar .navbar-nav {
+    @apply flex
+  }
+
+  .navbar .navbar-nav a {
+    @apply px-2
+  }
+
+  .navbar .navbar-nav a:hover {
+    @apply text-gray-100
+  }
+}
