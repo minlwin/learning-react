@@ -1,6 +1,6 @@
-import { ActiveMenuProvider } from "@/model/providers/ActiveMenuProvider";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
+import ApplicationProvider from "@/model/providers/ApplicationProvider";
 
 export default function RootLayout({
   children,
@@ -8,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ActiveMenuProvider>
+    <ApplicationProvider>
       <html lang="en">
         <body>
             <NavBar />
@@ -17,6 +17,6 @@ export default function RootLayout({
             </div>
         </body>
       </html>
-    </ActiveMenuProvider>
+    </ApplicationProvider>
   );
 }

@@ -2,6 +2,14 @@
 
 import { createContext, useContext, useState } from "react"
 
+interface ActiveMenuContextType {
+    activeMenu?:string
+    setActiveMenu(activeMenu?:string):void
+}
+
+const ActiveMenuContext = createContext<ActiveMenuContextType | undefined>(undefined)
+
+
 export function ActiveMenuProvider({children}:{children:React.ReactNode}) {
 
     const [activeMenu, setActiveMenu] = useState<string | undefined>()
@@ -12,13 +20,6 @@ export function ActiveMenuProvider({children}:{children:React.ReactNode}) {
         </ActiveMenuContext.Provider>
     )
 }
-
-export interface ActiveMenuContextType {
-    activeMenu?:string
-    setActiveMenu(activeMenu?:string):void
-}
-
-export const ActiveMenuContext = createContext<ActiveMenuContextType | undefined>(undefined)
 
 export const useActiveMenu = () => {
     const context = useContext(ActiveMenuContext)

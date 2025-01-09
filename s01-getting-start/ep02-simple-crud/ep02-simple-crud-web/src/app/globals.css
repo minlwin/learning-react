@@ -23,7 +23,7 @@ body {
 @layer components {
 
   .navbar {
-    @apply bg-black py-4 px-16 text-gray-300 flex justify-between
+    @apply bg-blue-700 py-4 px-16 text-gray-300 flex justify-between
   }
 
   .navbar-brand {
@@ -44,5 +44,45 @@ body {
 
   .navbar .navbar-nav a:hover {
     @apply text-gray-100
+  }
+
+  .btn-wrapper {
+    @apply pt-7
+  }
+
+  .search-form {
+    @apply my-3 flex
+  }
+
+  label {
+    @apply mb-1 block
+  }
+
+  input {
+    @apply p-2.5 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+  }
+
+  select {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+  }
+
+  .btn {
+    @apply inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800
+  }
+
+  table {
+    @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400
+  }
+
+  table > thead {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400
+  }
+
+  table > tbody > tr {
+    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700
+  }
+
+  table td, table th {
+    @apply px-6 py-3
   }
 }
