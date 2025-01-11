@@ -1,5 +1,7 @@
+import { Skeleton } from "@/components/ui/skeleton";
+
 export default function Page() {
   return (
-    <h1>Hello Shadcn UI</h1>
+    <Skeleton className="w-full h-5/6" />
   )
 }
