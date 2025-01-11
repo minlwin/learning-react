@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState } from "react"
+import { Children } from ".."
 
 interface ActiveMenuContextType {
     activeMenu?:string
@@ -10,7 +11,7 @@ interface ActiveMenuContextType {
 const ActiveMenuContext = createContext<ActiveMenuContextType | undefined>(undefined)
 
 
-export function ActiveMenuProvider({children}:{children:React.ReactNode}) {
+export function ActiveMenuProvider({children}:Children) {
 
     const [activeMenu, setActiveMenu] = useState<string | undefined>()
 

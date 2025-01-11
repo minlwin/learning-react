@@ -58,7 +58,7 @@ body {
     @apply mb-1 block
   }
 
-  input {
+  input, textarea {
     @apply p-2.5 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
   }
 
@@ -84,5 +84,9 @@ body {
 
   table td, table th {
     @apply px-6 py-3
+  }
+
+  .error {
+    @apply text-gray-400 text-sm
   }
 }

@@ -1,5 +1,6 @@
 package com.jdc.react.simple.domain.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -30,7 +31,7 @@ public class Course {
 	private String description;
 	
 	@OneToMany(mappedBy = "course")
-	private List<Section> sections;
+	private List<Section> sections = new ArrayList<>();
 	
 	public enum Level {
 		Basic, Intermediate, Advance

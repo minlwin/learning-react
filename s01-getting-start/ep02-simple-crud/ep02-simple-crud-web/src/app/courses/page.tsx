@@ -1,12 +1,16 @@
 'use client'
 
 import { FormGroup } from "@/components/FormGroup"
+import Nodata from "@/components/Nodata"
 import PageTitle from "@/components/PageTitle"
-import { CourseSearch, Levels } from "@/model/index"
+import { searchCourse } from "@/model/clients/course-clients"
+import { CourseInfo, CourseSearch, Levels } from "@/model/index"
 import { useActiveMenu } from "@/model/providers/ActiveMenuProvider"
+import CoursesProvider, { useCourses } from "@/model/providers/CoursesProvider"
 import Link from "next/link"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
+import { BiSend } from "react-icons/bi"
 
 export default function Page() {
 
@@ -24,7 +28,12 @@ export default function Page() {
 
 function SearchForm() {
     const {register, handleSubmit} = useForm<CourseSearch>()
-    const onSubmit = async (data:CourseSearch) => console.log(data)
+    const {setCourses} = useCourses()
+
+    const onSubmit = async (data:CourseSearch) => {
+        const result = await searchCourse(data)
+        setCourses(result)
+    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="search-form">
@@ -43,7 +52,7 @@ function SearchForm() {
                 <button type="submit" className="btn">
                     Search
                 </button>
-                <Link href={'/courses/0/edit'} type="button" className="btn">
+                <Link href={{pathname: '/courses/0/edit'}} type="button" className="btn">
                     Add New Course
                 </Link>
             </div>
@@ -52,26 +61,46 @@ function SearchForm() {
 }
 
 function ListView() {
+
+    const {courses} = useCourses()
+
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Level</th>
-                    <th>Fees</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Java Basic</td>
-                    <td>Basic</td>
-                    <td>300,000</td>
-                    <td>Foundation Course for Java</td>
-                </tr>
-            </tbody>
-        </table>    
+        <>
+        {courses ? 
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Level</th>
+                        <th>Fees</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {courses && courses.map(course => <Row key={course.id} data={course} />) }
+                </tbody>
+            </table>  
+            : <Nodata message="There is no courses" />            
+        }
+        </>
     )
+}
+
+function Row({data}: {data: CourseInfo}) {
+    return (
+        <tr>
+            <td>{data.id}</td>
+            <td>{data.name}</td>
+            <td>{data.level}</td>
+            <td>{data.fees}</td>
+            <td>{data.description}</td>
+            <td className="w-10">
+                <Link href={`/courses/${data.id}/details`}>
+                    <BiSend />
+                </Link>
+            </td>
+        </tr>        
+    )    
 }
