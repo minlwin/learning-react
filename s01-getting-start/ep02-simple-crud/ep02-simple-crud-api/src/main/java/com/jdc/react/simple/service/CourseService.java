@@ -21,16 +21,16 @@ public class CourseService {
 	private CourseRepo repo;
 
 	@Transactional
-	public CourseDetails create(CourseForm form) {
-		return CourseDetails.from(repo.save(form.entity()));
+	public CourseInfo create(CourseForm form) {
+		return CourseInfo.from(repo.save(form.entity()));
 	}
 
 	@Transactional
-	public CourseDetails update(int id, CourseForm form) {
+	public CourseInfo update(int id, CourseForm form) {
 		return repo.findById(id).map(a -> {
 			form.update(a);
 			return a;
-		}).map(CourseDetails::from)
+		}).map(CourseInfo::from)
 		.orElseThrow();
 	}
 
@@ -48,6 +48,12 @@ public class CourseService {
 			cq.where(search.where(cb, root));
 			return cq;
 		});
+	}
+
+	public CourseInfo findByIdForEdit(int id) {
+		return repo.findById(id)
+				.map(CourseInfo::from)
+				.orElseThrow();
 	}
 
 }

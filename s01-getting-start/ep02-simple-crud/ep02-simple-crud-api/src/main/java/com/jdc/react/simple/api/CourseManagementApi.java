@@ -36,14 +36,19 @@ public class CourseManagementApi {
 		return service.findById(id);
 	}
 	
+	@GetMapping("{id}/edit")
+	CourseInfo findForEdit(@PathVariable int id) {
+		return service.findByIdForEdit(id);
+	}
+
 	@PostMapping
-	CourseDetails create(
+	CourseInfo create(
 			@Validated @RequestBody CourseForm form, BindingResult result) {
 		return service.create(form);
 	}
 
 	@PutMapping("{id}")
-	CourseDetails update(@PathVariable int id,
+	CourseInfo update(@PathVariable int id,
 			@Validated @RequestBody CourseForm form, BindingResult result) {
 		return service.update(id, form);
 	}

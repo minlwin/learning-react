@@ -1,19 +1,20 @@
 'use client'
-import { useForm } from "react-hook-form"
 import z from "zod"
+import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Plus, Search } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { courseLevels } from "@/lib/types"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import Link from "next/link"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { ChevronRight, Plus, Search } from "lucide-react"
 import { CourseResultProvider, useCourseResult } from "@/lib/providers/course-result-provider"
+import { courseLevels } from "@/lib/types"
 import { useCourseSearch } from "@/hooks/client/course-clients"
-import { Table } from "@/components/ui/table"
 import { courseSearchSchema } from "@/lib/schemas/course-search-schema"
+import Link from "next/link"
+import { useEffect } from "react"
 
 export default function Page() {
     return (
@@ -40,6 +41,11 @@ function SearchForm() {
     const {setList} = useCourseResult()
 
     const search = async (value:z.infer<typeof courseSearchSchema>) => {
+        
+        if(value.level == "all") {
+            value.level = undefined
+        }
+        
         const result = await useCourseSearch(value)
         setList(result)
     }
@@ -47,7 +53,6 @@ function SearchForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(search)} className="flex gap-4 py-4">
-                
                 <FormField control={form.control} name="level"
                     render={({field}) => (
                         <FormItem className="w-40">
@@ -55,10 +60,11 @@ function SearchForm() {
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Search Level" />
+                                        <SelectValue placeholder="All Levels" />
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
+                                    <SelectItem value="all">All Levels</SelectItem>
                                     {courseLevels.map(item => (
                                         <SelectItem key={item} value={item}>{item}</SelectItem>
                                     ))}
@@ -93,21 +99,49 @@ function SearchForm() {
 
 function ResultTable() {
     const {list} = useCourseResult()
+
+    useEffect(() => {
+        console.log(list)
+    }, [list])
     return (
         <>
-            {   
-                list.length == 0 ? 
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Search Result</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        There is no course information.
-                    </CardContent>
-                </Card> : 
-
-                <Table></Table>
-            }
+            <Card>
+                <CardHeader>
+                    <CardTitle>Search Result</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    {list.length == 0 ? "There is no course information." : 
+		                <Table>
+		                    <TableHeader>
+		                        <TableRow>
+		                            <TableHead>ID</TableHead>
+		                            <TableHead>Course</TableHead>
+		                            <TableHead>Level</TableHead>
+		                            <TableHead>Fees</TableHead>
+		                            <TableHead>Description</TableHead>
+		                            <TableHead></TableHead>
+		                        </TableRow>
+		                    </TableHeader>
+		                    <TableBody>
+		                        {list.map(data => (
+		                            <TableRow key={data.id}>
+		                                <TableCell>{data.id}</TableCell>
+		                                <TableCell>{data.name}</TableCell>
+		                                <TableCell>{data.level}</TableCell>
+		                                <TableCell>{data.fees}</TableCell>
+		                                <TableCell>{data.description}</TableCell>
+		                                <TableCell>
+		                                    <Link href={`/courses/${data.id}/details`}>
+		                                        <ChevronRight size={16} />
+		                                    </Link>
+		                                </TableCell>
+		                            </TableRow>
+		                        ))}
+		                    </TableBody>
+		                </Table>
+                    }
+                </CardContent>
+            </Card> 
         </>
     )
 }

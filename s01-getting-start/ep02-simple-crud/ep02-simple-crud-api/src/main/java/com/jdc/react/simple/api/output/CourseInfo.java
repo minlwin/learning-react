@@ -23,4 +23,8 @@ public record CourseInfo(
 			root.get(Course_.description)
 		);
 	}
+	
+	public static CourseInfo from(Course entity) {
+		return new CourseInfo(entity.getId(), entity.getName(), entity.getLevel(), entity.getFees(), entity.getDescription());
+	}
 }

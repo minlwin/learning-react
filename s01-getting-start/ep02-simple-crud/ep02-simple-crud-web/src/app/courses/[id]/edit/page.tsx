@@ -5,10 +5,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useCourseCreate, useCourseUpdate } from "@/hooks/client/course-clients";
 import { courseFormSchema } from "@/lib/schemas/course-form-schema";
 import { courseLevels } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Save } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { use, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import z from 'zod'
@@ -16,15 +18,21 @@ import z from 'zod'
 export default function Page({params} : {params: Promise<{id:number}>}) {
     
     const {id} = use(params)
+    const router = useRouter()
+
     const form = useForm<z.infer<typeof courseFormSchema>>({
         resolver: zodResolver(courseFormSchema),
     })
 
-    const save = async (form: z.infer<typeof courseFormSchema>) => {
-        console.log(form)
+    const save = async (data: z.infer<typeof courseFormSchema>) => {
+        console.log(data)
+        const result = (id == 0) ? await useCourseCreate(data) : 
+            await useCourseUpdate(id, data)
+        router.replace(`/courses/${result.id}/details`)
     }
 
     useEffect(() => {
+
     }, [id])
 
     return (
@@ -36,7 +44,7 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(save)}>
                         <div className="flex gap-4">
-                            <FormField control={form.control} name="lavel" 
+                            <FormField control={form.control} name="level" 
                                 render={({field}) => (
                                     <FormItem className="w-1/3">
                                         <FormLabel>Course Level</FormLabel>
