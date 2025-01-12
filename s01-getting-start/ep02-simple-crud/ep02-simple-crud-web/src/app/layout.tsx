@@ -1,19 +1,28 @@
-import "./globals.css";
-import NavBar from "@/components/NavBar";
-import { Children } from "@/model";
-import ApplicationProvider from "@/model/providers/ApplicationProvider";
+import AppSidebar from "@/components/app/app-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { Children } from "@/lib/types";
 
-export default function RootLayout({children}: Children) {
+import './globals.css'
+import { ActiveMenuProvider } from "@/lib/providers/active-menu-provider";
+import AppTitle from "@/components/app/app-title";
+
+export default function RootLayout({children}:Children) {
   return (
-    <ApplicationProvider>
-      <html lang="en">
+    <ActiveMenuProvider>
+      <html>
         <body>
-            <NavBar />
-            <div className="py-4 px-16">
-            {children}
-            </div>
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="w-full p-4">
+              <AppTitle />
+
+              <div className="pt-4">
+                {children}
+              </div>
+            </main>
+          </SidebarProvider>
         </body>
       </html>
-    </ApplicationProvider>
-  );
+    </ActiveMenuProvider>
+  )
 }

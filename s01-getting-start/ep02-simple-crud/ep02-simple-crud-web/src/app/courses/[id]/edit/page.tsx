@@ -1,70 +1,103 @@
 'use client'
-import { FormGroup } from "@/components/FormGroup";
-import PageTitle from "@/components/PageTitle";
-import { CourseForm, Levels } from "@/model";
-import { createCourse } from "@/model/clients/course-clients";
-import { useRouter } from "next/navigation";
-import { use, useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { courseFormSchema } from "@/lib/schemas/course-form-schema";
+import { courseLevels } from "@/lib/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Save } from "lucide-react";
+import { use, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { BiSave } from "react-icons/bi";
+import z from 'zod'
 
-export default function Page({params} : {params: Promise<{id:string}>}) {
-
-    const [title, setTitle] = useState('Edit Course')
+export default function Page({params} : {params: Promise<{id:number}>}) {
+    
     const {id} = use(params)
-    useEffect(() => setTitle(id === '0' ? 'Add New Course' : 'Edit Course'), [id])
+    const form = useForm<z.infer<typeof courseFormSchema>>({
+        resolver: zodResolver(courseFormSchema),
+    })
 
-    const router = useRouter()
-
-    const {register, handleSubmit, formState: {errors}} = useForm<CourseForm>()
-    const save = async (form:CourseForm) => {
-        const result =  await createCourse(form)
-
-        if(result.id) {
-            router.push(`/courses/${result.id}/details`)
-        }
+    const save = async (form: z.infer<typeof courseFormSchema>) => {
+        console.log(form)
     }
 
+    useEffect(() => {
+    }, [id])
+
     return (
-        <>
-            <PageTitle title={title} />
+        <Card>
+            <CardHeader>
+                <CardTitle>{id > 0 ? 'Edit Course' : 'Add New Course'}</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(save)}>
+                        <div className="flex gap-4">
+                            <FormField control={form.control} name="lavel" 
+                                render={({field}) => (
+                                    <FormItem className="w-1/3">
+                                        <FormLabel>Course Level</FormLabel>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            <FormControl>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Select One" />
+                                                </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                                {courseLevels.map(item => (
+                                                    <SelectItem key={item} value={item}>{item}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        <FormMessage />
+                                    </FormItem>
+                                )} />
 
-            <form onSubmit={handleSubmit(save)} className="mt-3">
+                            <FormField control={form.control} name="name" 
+                                render={({field}) => (
+                                    <FormItem className="w-1/3">
+                                        <FormLabel>Course Name</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Enter Course Name" {...field}/>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )} />
 
-                <div className="flex gap-4 mb-4">
-                    <FormGroup label="Course Name" className="w-1/3">
-                        <input type="text" placeholder="Enter course name" {...register('name', {
-                            required: "Please enter course name."
-                        })} />
-                        {errors.name && <span className="error">{errors.name.message}</span>}
-                    </FormGroup>
+                            <FormField control={form.control} name="fees" 
+                                render={({field}) => (
+                                    <FormItem className="w-1/3">
+                                        <FormLabel>Course Fees</FormLabel>
+                                        <FormControl>
+                                            <Input type="number" {...field}/>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )} />
+                        </div>
+                        
+                        <div className="my-4">
+                            <FormField control={form.control} name="description" 
+                                render={({field}) => (
+                                    <FormItem className="w-full">
+                                        <FormLabel>Description</FormLabel>
+                                        <FormControl>
+                                            <Textarea placeholder="Description for course" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )} />
+                        </div>
 
-                    <FormGroup label="Course Level" className="w-1/3">
-                        <select {...register('level', {
-                            required: "Please select course level."
-                        })}>
-                            <option value="">Select Course</option>
-                            {Levels.map(item => <option key={item} value={item}>{item}</option> )}
-                        </select>
-                        {errors.level && <span className="error">{errors.level.message}</span>}
-                    </FormGroup>
-
-                    <FormGroup label="Fees" className="w-1/3">
-                        <input type="number" placeholder="Enter fees for course" {...register('fees', {
-                            required: "Please enter fees for course."
-                        })} />
-                        {errors.fees && <span className="error">{errors.fees.message}</span>}
-                    </FormGroup>
-                </div>
-
-                <FormGroup label="Description" className="mb-4">
-                    <textarea {...register('description')} placeholder="Enter Description"></textarea>
-                </FormGroup>
-                
-                <button className="btn flex gap-2 items-center" type="submit">
-                    <BiSave /> Save Course
-                </button>
-            </form>
-        </>
+                        <Button type="submit">
+                            <Save /> Save Course
+                        </Button>
+                    </form>
+                </Form>
+            </CardContent>
+        </Card>
     )
 }

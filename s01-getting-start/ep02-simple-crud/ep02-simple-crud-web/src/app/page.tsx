@@ -1,17 +1,7 @@
-'use client'
+import { Skeleton } from "@/components/ui/skeleton";
 
-import PageTitle from "@/components/PageTitle";
-import { useActiveMenu } from "@/model/providers/ActiveMenuProvider";
-import { useEffect } from "react";
-
-export default function Home() {
-  
-  const {setActiveMenu} = useActiveMenu()
-  useEffect(() => setActiveMenu(undefined), [])
-
+export default function Page() {
   return (
-    <>
-      <PageTitle title="Simple CRUD" />
-    </>
+    <Skeleton className="h-5/6 w-full" />
   )
 }
