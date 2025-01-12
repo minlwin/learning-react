@@ -1,17 +1,17 @@
 import axios from 'axios'
 import { BASE_API } from ".";
-import { CourseInfo } from '@/lib/types';
+import { CourseDetails, CourseInfo } from '@/lib/types';
 
 export async function useCourseSearch(form:any) {
     return (await axios.get<CourseInfo[]>(`${BASE_API}/course`, {params: form})).data
 }
 
 export async function useCourseDetails(id:number) {
-    return (await axios.get<CourseInfo[]>(`${BASE_API}/course/${id}`)).data
+    return (await axios.get<CourseDetails>(`${BASE_API}/course/${id}`)).data
 }
 
 export async function useCourseForEdit(id:number) {
-    return (await axios.get<CourseInfo[]>(`${BASE_API}/course/${id}/edit`)).data
+    return (await axios.get<CourseInfo>(`${BASE_API}/course/${id}/edit`)).data
 }
 
 export async function useCourseCreate(form:any) {
