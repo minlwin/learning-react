@@ -38,7 +38,7 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
                             <div className="flex flex-col items-start gap-4">
                                 <Information label="Course Name" value={data.name} />
                                 <Information label="Course Level" value={data.level} />
-                                <Information label="Fees" value={`${data.fees} MMK`} />
+                                <Information label="Fees" value={`${data.fees.toLocaleString()} MMK`} />
                                 {data.description && 
                                     <Information label="Description" value={data.description} />
                                 }
@@ -60,8 +60,6 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
                 <div></div>
             )}
         </>
-
-
     )
 }
 

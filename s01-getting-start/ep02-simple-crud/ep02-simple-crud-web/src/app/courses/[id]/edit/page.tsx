@@ -1,9 +1,11 @@
 'use client'
+import AppFormInput from "@/components/app/app-form-input";
+import AppFormSelect from "@/components/app/app-form-select";
+import AppFormTextarea from "@/components/app/app-form-textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useCourseCreate, useCourseForEdit, useCourseUpdate } from "@/hooks/client/course-clients";
 import { courseFormSchema } from "@/lib/schemas/course-form-schema";
@@ -22,6 +24,12 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
 
     const form = useForm<z.infer<typeof courseFormSchema>>({
         resolver: zodResolver(courseFormSchema),
+        defaultValues: {
+            level: 'Basic',
+            name: '',
+            fees: '',
+            description: ''
+        }
     })
 
     const save = async (data: z.infer<typeof courseFormSchema>) => {
@@ -33,15 +41,17 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
 
     useEffect(() => {
         const load = async () => {
-            const result = await useCourseForEdit(id)
-            form.setValue('name', result.name)
-            form.setValue('level', result.level)
-            form.setValue('fees', result.fees)
-            form.setValue('description', result.description)
+            const {name, level, fees, description} = await useCourseForEdit(id)
+            form.setValue('name', name)
+            form.setValue('level', level)
+            form.setValue('fees', `${fees}`)
+            form.setValue('description', description)
         }
 
-        load()
-    }, [id])
+        if(id > 0) {
+            load()
+        }
+    }, [id, form])
 
     return (
         <Card>
@@ -57,60 +67,27 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(save)}>
                                 <div className="flex gap-4">
-                                    <FormField control={form.control} name="level" 
-                                        render={({field}) => (
-                                            <FormItem className="w-1/3">
-                                                <FormLabel>Course Level</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger>
-                                                            <SelectValue placeholder="Select One" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        {courseLevels.map(item => (
-                                                            <SelectItem key={item} value={item}>{item}</SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )} />
+                                    <AppFormSelect<z.infer<typeof courseFormSchema>>
+                                        lable="Course Level"
+                                        items={courseLevels}
+                                        control={form.control}
+                                        name="level"
+                                        className="w-1/3"
+                                        placeholder="Select Course Level" />
 
-                                    <FormField control={form.control} name="name" 
-                                        render={({field}) => (
-                                            <FormItem className="w-1/3">
-                                                <FormLabel>Course Name</FormLabel>
-                                                <FormControl>
-                                                    <Input placeholder="Enter Course Name" {...field}/>
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )} />
+                                    <AppFormInput 
+                                        control={form.control} name="name" label="Course Name" 
+                                        className="w-1/3" placeholder="Enter Course Name" />
 
-                                    <FormField control={form.control} name="fees" 
-                                        render={({field}) => (
-                                            <FormItem className="w-1/3">
-                                                <FormLabel>Course Fees</FormLabel>
-                                                <FormControl>
-                                                    <Input type="number" {...field}/>
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )} />
+
+                                    <AppFormInput control={form.control} name="fees" 
+                                        label="Fees" type="number" className="w-1/3" placeholder="Enter Course Fees" />    
+                               
                                 </div>
                                 
                                 <div className="my-4">
-                                    <FormField control={form.control} name="description" 
-                                        render={({field}) => (
-                                            <FormItem className="w-full">
-                                                <FormLabel>Description</FormLabel>
-                                                <FormControl>
-                                                    <Textarea placeholder="Description for course" {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )} />
+                                    <AppFormTextarea control={form.control} name="description" label="Description"
+                                        placeholder="Enter Course Description"  />
                                 </div>
 
                                 <Button type="submit">

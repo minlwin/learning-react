@@ -15,6 +15,7 @@ import { useCourseSearch } from "@/hooks/client/course-clients"
 import { courseSearchSchema } from "@/lib/schemas/course-search-schema"
 import Link from "next/link"
 import { useEffect } from "react"
+import AppFormSelect from "@/components/app/app-form-select"
 
 export default function Page() {
     return (
@@ -53,25 +54,13 @@ function SearchForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(search)} className="flex gap-4 py-4">
-                <FormField control={form.control} name="level"
-                    render={({field}) => (
-                        <FormItem className="w-40">
-                            <FormLabel>Course Level</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="All Levels" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="all">All Levels</SelectItem>
-                                    {courseLevels.map(item => (
-                                        <SelectItem key={item} value={item}>{item}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </FormItem>
-                    )} />
+                <AppFormSelect 
+                    control={form.control} 
+                    name="level"
+                    lable="Level"
+                    placeholder="Select Level"
+                    items={courseLevels}
+                    className="w-40" />
                 
                 <FormField control={form.control} name="keyword" 
                     render={({field}) => (
@@ -128,7 +117,7 @@ function ResultTable() {
 		                                <TableCell>{data.id}</TableCell>
 		                                <TableCell>{data.name}</TableCell>
 		                                <TableCell>{data.level}</TableCell>
-		                                <TableCell>{data.fees}</TableCell>
+		                                <TableCell>{data.fees.toLocaleString()} MMK</TableCell>
 		                                <TableCell>{data.description}</TableCell>
 		                                <TableCell>
 		                                    <Link href={`/courses/${data.id}/details`}>
