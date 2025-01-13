@@ -17,7 +17,6 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
             const result = await useCourseDetails(id)
             setData(result)
         }
-
         load()
     }, [id])
 

@@ -7,3 +7,5 @@ export const courseFormSchema = z.object({
         .refine(data => !isNaN(parseInt(data)), {message: "Please enter valid number."}),
     description: z.string().optional()
 })
+
+export type CourseForm = z.infer<typeof courseFormSchema>

@@ -1,21 +1,19 @@
 'use client'
-import z from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { Form } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { ChevronRight, Plus, Search } from "lucide-react"
+import { Plus, Search } from "lucide-react"
 import { CourseResultProvider, useCourseResult } from "@/lib/providers/course-result-provider"
 import { courseLevels } from "@/lib/types"
 import { useCourseSearch } from "@/hooks/client/course-clients"
-import { courseSearchSchema } from "@/lib/schemas/course-search-schema"
+import { CourseSearch, courseSearchSchema } from "@/lib/schemas/course-search-schema"
 import Link from "next/link"
 import { useEffect } from "react"
 import AppFormSelect from "@/components/app/app-form-select"
+import AppFormInput from "@/components/app/app-form-input"
+import AppTableView, { AppTableModel } from "@/components/app/app-table-view"
 
 export default function Page() {
     return (
@@ -33,45 +31,35 @@ export default function Page() {
     )
 }
 
-
 function SearchForm() {
-    const form = useForm<z.infer<typeof courseSearchSchema>>({
+    const form = useForm<CourseSearch>({
         resolver: zodResolver(courseSearchSchema),
     })
 
     const {setList} = useCourseResult()
 
-    const search = async (value:z.infer<typeof courseSearchSchema>) => {
-        
+    const search = async (value:CourseSearch) => {
         if(value.level == "all") {
             value.level = undefined
         }
-        
         const result = await useCourseSearch(value)
         setList(result)
     }
 
+    useEffect(() => {
+        const load = async() => await search(form.getValues())
+        load()
+    }, [form])
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(search)} className="flex gap-4 py-4">
-                <AppFormSelect 
-                    control={form.control} 
-                    name="level"
-                    lable="Level"
-                    placeholder="Select Level"
-                    items={courseLevels}
-                    className="w-40" />
+
+                <AppFormSelect control={form.control} name="level" lable="Level"
+                    placeholder="Select Level" items={courseLevels} className="w-40" />
                 
-                <FormField control={form.control} name="keyword" 
-                    render={({field}) => (
-                        <FormItem className="w-80">
-                            <FormLabel>Keyword</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Search Keyword" {...field}/>
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
+                <AppFormInput control={form.control} name="keyword" label="Keyword" 
+                    placeholder="Search Keyword" className="w-80" />
 
                 <div className="pt-8">
                     <Button type="submit" className="me-2"><Search/> Search</Button> 
@@ -100,37 +88,25 @@ function ResultTable() {
                 </CardHeader>
                 <CardContent>
                     {list.length == 0 ? "There is no course information." : 
-		                <Table>
-		                    <TableHeader>
-		                        <TableRow>
-		                            <TableHead>ID</TableHead>
-		                            <TableHead>Course</TableHead>
-		                            <TableHead>Level</TableHead>
-		                            <TableHead>Fees</TableHead>
-		                            <TableHead>Description</TableHead>
-		                            <TableHead></TableHead>
-		                        </TableRow>
-		                    </TableHeader>
-		                    <TableBody>
-		                        {list.map(data => (
-		                            <TableRow key={data.id}>
-		                                <TableCell>{data.id}</TableCell>
-		                                <TableCell>{data.name}</TableCell>
-		                                <TableCell>{data.level}</TableCell>
-		                                <TableCell>{data.fees.toLocaleString()} MMK</TableCell>
-		                                <TableCell>{data.description}</TableCell>
-		                                <TableCell>
-		                                    <Link href={`/courses/${data.id}/details`}>
-		                                        <ChevronRight size={16} />
-		                                    </Link>
-		                                </TableCell>
-		                            </TableRow>
-		                        ))}
-		                    </TableBody>
-		                </Table>
+                        <AppTableView model={getTableModel(list)} />
                     }
                 </CardContent>
             </Card> 
         </>
     )
+}
+
+function getTableModel(dataSet:{[key:string]:any}[]):AppTableModel {
+    return {
+        columns: [
+            {fieldName: 'id', header: "ID", type: 'Value'},
+            {fieldName: 'name', header: "Name", type: 'Value'},
+            {fieldName: 'level', header: "Level", type: 'Value'},
+            {fieldName: 'fees', header: "Fees", type: 'Value', className: 'text-end'},
+            {fieldName: 'id', header: '', type: {
+                detailsUrl : (id) => `/courses/${id}/details`
+            }}
+        ],
+        rows: dataSet
+    }
 }

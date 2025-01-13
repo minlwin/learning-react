@@ -6,7 +6,7 @@ export default function Page() {
     )
 }
 
-function SearchBar() {
+function SearchForm() {
 
 }
 
