@@ -58,7 +58,7 @@ function SearchForm() {
                 <div className="pt-8">
                     <Button type="submit" className="me-2"><Search/> Search</Button> 
                     <Button asChild variant={"destructive"}>
-                        <Link href="/sections/0/edit" >
+                        <Link href="/classes/0/edit" >
                             <Plus /> Create
                         </Link>
                     </Button>
