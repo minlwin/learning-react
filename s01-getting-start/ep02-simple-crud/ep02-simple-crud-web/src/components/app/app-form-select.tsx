@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 export default function AppFormSelect<T extends FieldValues = FieldValues, >({
     control,
     name,
-    lable,
+    label,
     placeholder,
     className,
     items
@@ -14,7 +14,7 @@ export default function AppFormSelect<T extends FieldValues = FieldValues, >({
         <FormField control={control} name={name} 
             render={({field}) =>(
                 <FormItem className={className}>
-                    <FormLabel>{lable}</FormLabel>
+                    <FormLabel>{label}</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value} defaultValue={field.value} >
                         <FormControl>
                             <SelectTrigger>
@@ -40,7 +40,7 @@ export default function AppFormSelect<T extends FieldValues = FieldValues, >({
 type AppFormSelectModel<T extends FieldValues = FieldValues> = {
     control?: Control<T, any>,
     name: Path<T>,
-    lable: string,
+    label: string,
     placeholder?: string,
     className?: string,
     items: AppFormSelectItemModel[]

@@ -35,15 +35,15 @@ public class SectionManagementApi {
 	SectionDetails findById(@PathVariable int id) {
 		return service.findById(id);
 	}
-	
+
 	@PostMapping
-	SectionDetails create(
+	SectionInfo create(
 			@Validated @RequestBody SectionForm form, BindingResult result) {
 		return service.create(form);
 	}
 
 	@PutMapping("{id}")
-	SectionDetails update(@PathVariable int id,
+	SectionInfo update(@PathVariable int id,
 			@Validated @RequestBody SectionForm form, BindingResult result) {
 		return service.update(id, form);
 	}

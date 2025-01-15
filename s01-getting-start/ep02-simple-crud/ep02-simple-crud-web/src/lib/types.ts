@@ -29,15 +29,12 @@ export const classTypes:ClassType[] = ['Campus', 'Online']
 
 export type SectionInfo = {
     id:number
-    courseId:number
     courseName:number
     courseLevel:string
     type:ClassType
     fees:number
     months:number
     startAt:string
-    startTime:string
-    endTime:string
 }
 
 export type SectionDetails = {

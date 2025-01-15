@@ -30,7 +30,6 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
     })
 
     const save = async (data: CourseForm) => {
-        console.log(data)
         const result = (id == 0) ? await useCourseCreate(data) : 
             await useCourseUpdate(id, data)
         router.replace(`/courses/${result.id}/details`)
@@ -64,7 +63,7 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(save)}>
                                 <div className="flex gap-4">
-                                    <AppFormSelect control={form.control} name="level" lable="Course Level" 
+                                    <AppFormSelect control={form.control} name="level" label="Course Level" 
                                         items={courseLevels} className="w-1/3" placeholder="Select Course Level" />
 
                                     <AppFormInput 
@@ -82,7 +81,7 @@ export default function Page({params} : {params: Promise<{id:number}>}) {
 
                                 <Button type="submit">
                                     <Save /> Save Course
-                                </Button>
+                                </Button>                      
                             </form>
                         </Form>
                     </div>

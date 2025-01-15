@@ -24,19 +24,19 @@ public class SectionService {
 	private CourseRepo courseRepo;
 
 	@Transactional
-	public SectionDetails create(SectionForm form) {
+	public SectionInfo create(SectionForm form) {
 		var entity = form.entity();
 		entity.setCourse(courseRepo.findById(form.courseId()).orElseThrow());
 		entity = sectionRepo.save(entity);
-		return SectionDetails.from(entity);
+		return SectionInfo.from(entity);
 	}
 
 	@Transactional
-	public SectionDetails update(int id, SectionForm form) {
+	public SectionInfo update(int id, SectionForm form) {
 		var entity = sectionRepo.findById(id).orElseThrow();
 		entity.setCourse(courseRepo.findById(form.courseId()).orElseThrow());
 		form.update(entity);
-		return SectionDetails.from(entity);
+		return SectionInfo.from(entity);
 	}
 
 	public SectionDetails findById(int id) {

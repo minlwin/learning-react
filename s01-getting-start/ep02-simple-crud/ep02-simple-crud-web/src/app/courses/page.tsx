@@ -13,7 +13,7 @@ import Link from "next/link"
 import { useEffect } from "react"
 import AppFormSelect from "@/components/app/app-form-select"
 import AppFormInput from "@/components/app/app-form-input"
-import AppTableView, { AppTableModel } from "@/components/app/app-table-view"
+import AppTableView, { AppTableColumn } from "@/components/app/app-table-view"
 
 export default function Page() {
     return (
@@ -35,7 +35,6 @@ function SearchForm() {
     const form = useForm<CourseSearch>({
         resolver: zodResolver(courseSearchSchema),
     })
-
     const {setList} = useCourseResult()
 
     const search = async (value:CourseSearch) => {
@@ -46,6 +45,7 @@ function SearchForm() {
         setList(result)
     }
 
+
     useEffect(() => {
         const load = async() => await search(form.getValues())
         load()
@@ -55,7 +55,7 @@ function SearchForm() {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(search)} className="flex gap-4 py-4">
 
-                <AppFormSelect control={form.control} name="level" lable="Level"
+                <AppFormSelect control={form.control} name="level" label="Level"
                     placeholder="Select Level" items={courseLevels} className="w-40" />
                 
                 <AppFormInput control={form.control} name="keyword" label="Keyword" 
@@ -76,10 +76,6 @@ function SearchForm() {
 
 function ResultTable() {
     const {list} = useCourseResult()
-
-    useEffect(() => {
-        console.log(list)
-    }, [list])
     return (
         <>
             <Card>
@@ -88,7 +84,7 @@ function ResultTable() {
                 </CardHeader>
                 <CardContent>
                     {list.length == 0 ? "There is no course information." : 
-                        <AppTableView model={getTableModel(list)} />
+                        <AppTableView columns={COLUMNS} rows={list} />
                     }
                 </CardContent>
             </Card> 
@@ -96,17 +92,12 @@ function ResultTable() {
     )
 }
 
-function getTableModel(dataSet:{[key:string]:any}[]):AppTableModel {
-    return {
-        columns: [
-            {fieldName: 'id', header: "ID", type: 'Value'},
-            {fieldName: 'name', header: "Name", type: 'Value'},
-            {fieldName: 'level', header: "Level", type: 'Value'},
-            {fieldName: 'fees', header: "Fees", type: 'Value', className: 'text-end'},
-            {fieldName: 'id', header: '', type: {
-                detailsUrl : (id) => `/courses/${id}/details`
-            }}
-        ],
-        rows: dataSet
-    }
-}
+const COLUMNS:AppTableColumn[] = [
+    {fieldName: 'id', header: "ID", type: 'Value'},
+    {fieldName: 'name', header: "Name", type: 'Value'},
+    {fieldName: 'level', header: "Level", type: 'Value'},
+    {fieldName: 'fees', header: "Fees", type: 'Value', className: 'text-end'},
+    {fieldName: 'id', header: '', type: {
+        detailsUrl : (id) => `/courses/${id}/details`
+    }}
+]
