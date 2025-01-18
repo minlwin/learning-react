@@ -1,6 +1,10 @@
+'use client'
+
 import { Childern, MenuItem } from "@/lib/types";
 import "./globals.css";
-import Link from "next/link";
+import { Card } from "flowbite-react";
+import { FormResultProvider, useFormResult } from "@/lib/form-result.provider";
+import { JsonViewr } from "@/components/json-viewer";
 
 export default function Layout({children} : Childern) {
   return (
@@ -12,22 +16,54 @@ export default function Layout({children} : Childern) {
           <ul className="flex gap-4">
             {MENUS.map((item, index) => (
               <li key={index}>
-                <Link href={item.url}>{item.name}</Link>
+                <a href={item.url}>{item.name}</a>
               </li>
             ))}
           </ul>
         </nav>
         <main className="py-4 px-16">
-          { children }
+          <div className="flex justify-stretch gap-4">
+            <FormResultProvider>
+              <Card className="w-1/2">
+                { children }
+              </Card>
+              <FormResult />
+            </FormResultProvider>
+          </div>
         </main>
       </body>
     </html>
   )
 }
 
+function FormResult() {
+  const { result } = useFormResult()
+
+  return (
+    <Card className="flex-grow">
+      <div className="h-full">
+        <h3 className="text-2xl">Form Result</h3>
+        <div className="mt-4">
+          {result 
+            ? <JsonViewr data={result} />
+            : <Message />
+          }
+        </div>
+      </div>
+    </Card>
+  )
+}
+
+function Message() {
+  return (
+    <p>There is no data. Plase enter form data!</p>
+  )
+}
+
 const MENUS : MenuItem[] = [
   {name : 'Simple Form', url : '/simple'},
+  {name : 'Nested Form', url : '/nested'},
   {name : 'Form Array', url : '/array'},
-  {name : 'Dynamic Form Item', url : '/dynamic/item'},
   {name : 'Dynamic Form Array', url : '/dynamic/array'},
+  {name : 'Dynamic Form Group', url : '/dynamic/item'},
 ]

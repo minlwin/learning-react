@@ -1,32 +1,34 @@
 'use client'
-import { Button, Datepicker, Label, Select, TextInput } from "flowbite-react";
+import { useFormResult } from "@/lib/form-result.provider";
+import { Button, Label, Select, TextInput } from "flowbite-react";
 import { useForm } from "react-hook-form";
 
-export default function SimpleForm() {
+export default function Page() {
 
     const { 
         register, 
         handleSubmit, 
-        setValue,
         formState : {errors} 
     } = useForm<SimpleFormData>()
+
+    const { setResult } = useFormResult()
     
     const save = (form:SimpleFormData) => {
-        console.log(form)   
+        setResult(form)
     }
 
     return (
         <form onSubmit={handleSubmit(save)}>
             <h1 className="text-2xl">Simple Form</h1>
 
-            <div className="grid grid-cols-4 gap-4 mt-4">
+            <div className="grid grid-cols-2 gap-4 mt-4">
 
                 <div>
                     <Label className="block mb-1">Name</Label>
                     <TextInput placeholder="Enter Name" {...register('name', {
                         required : "Please enter your name."
                     })} />
-                    <span className="text-red-400 text-xs">{errors.name?.message}</span>
+                    {errors.name?.message && <span className="text-red-400 text-xs">{errors.name?.message}</span>}
                 </div>
 
                 <div className="col-start-1">
@@ -34,7 +36,7 @@ export default function SimpleForm() {
                     <TextInput placeholder="Enter Phone" type="tel" {...register('phone', {
                         required: "Please enter your phone."
                     })} />
-                    <span className="text-red-400 text-xs">{errors.phone?.message}</span>
+                    {errors.phone?.message && <span className="text-red-400 text-xs">{errors.phone?.message}</span>}
                 </div>
 
                 <div>
@@ -42,7 +44,7 @@ export default function SimpleForm() {
                     <TextInput placeholder="Enter Email" type="email" {...register('email', {
                         required: "Please enter email address."
                     })} />
-                    <span className="text-red-400 text-xs">{errors.gender?.message}</span>
+                    {errors.email?.message && <span className="text-red-400 text-xs">{errors.gender?.message}</span>}
                 </div>
 
                 <div className="col-start-1">
@@ -55,12 +57,15 @@ export default function SimpleForm() {
                             <option key={item} value={item}>{item}</option>
                         ))}
                     </Select>
-                    <span className="text-red-400 text-xs">{errors.gender?.message}</span>
+                    {errors.gender?.message && <span className="text-red-400 text-xs">{errors.gender?.message}</span>}
                 </div>
 
                 <div>
                     <Label className="block mb-1">Date Of Birth</Label>
-                    <Datepicker onChange={(date) => setValue('dob', date)} />
+                    <TextInput type="date" {...register('dob', {
+                        required : "Please enter date of birth."
+                    })} />
+                    {errors.dob?.message && <span className="text-red-400 text-xs">{errors.gender?.message}</span>}
                 </div>
 
                 <div className="col-start-1">

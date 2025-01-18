@@ -21,3 +21,10 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+
+  .error {
+    @apply text-red-600 text-sm
+  }
+}
