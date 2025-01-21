@@ -25,7 +25,9 @@ export default function Layout({children} : Childern) {
           <div className="flex justify-stretch gap-4">
             <FormResultProvider>
               <Card className="w-1/2">
-                { children }
+                <div className="h-full">
+                  { children }
+                </div>
               </Card>
               <FormResult />
             </FormResultProvider>
@@ -64,6 +66,5 @@ const MENUS : MenuItem[] = [
   {name : 'Simple Form', url : '/simple'},
   {name : 'Nested Form', url : '/nested'},
   {name : 'Form Array', url : '/array'},
-  {name : 'Dynamic Form Array', url : '/dynamic/array'},
-  {name : 'Dynamic Form Group', url : '/dynamic/item'},
+  {name : 'Dynamic Form', url : '/dynamic'},
 ]

@@ -1,5 +1,6 @@
 'use client'
 
+import { FieldError } from "@/components/field-error"
 import { useFormResult } from "@/lib/form-result.provider"
 import { Genders } from "@/lib/types"
 import { Button, Label, Select, Textarea, TextInput } from "flowbite-react"
@@ -31,7 +32,7 @@ export default function Page() {
                     <TextInput placeholder="Enter your name." {...register('name', {
                         required : 'Please enter member name.'
                     })} />
-                    {errors.name && <span className="error">{errors.name.message}</span>}
+                    <FieldError message={errors.name?.message} />
                 </div>
 
                 <div className="col-start-1">
@@ -44,7 +45,7 @@ export default function Page() {
                             <option key={item} value={item}>{item}</option>
                         ))}
                     </Select>
-                    {errors.gender && <span className="error">{errors.gender.message}</span>}
+                    <FieldError message={errors.gender?.message} />
                 </div>
 
                 <div>
@@ -52,15 +53,15 @@ export default function Page() {
                     <TextInput type="date" {...register('dob', {
                         required : 'Please enter date of birth.'
                     })} />
-                    {errors.dob && <span className="error">{errors.dob.message}</span>}
-                </div>
+                    <FieldError message={errors.dob?.message} />
+                    </div>
 
                 <div>
                     <Label>Phone Number</Label>
                     <TextInput type="tel" placeholder="Enter your phone number." {...register('contact.phone', {
                         required : "Please enter phone number."
                     })} />
-                    {errors.contact?.phone && <span className="error">{errors.contact.phone.message}</span>}
+                    <FieldError message={errors.contact?.phone?.message} />
                 </div>
 
                 <div>
@@ -68,7 +69,7 @@ export default function Page() {
                     <TextInput type="email" placeholder="Enter your email address." {...register('contact.email', {
                         required : "Please enter email address."
                     })} />
-                    {errors.contact?.email && <span className="error">{errors.contact.email.message}</span>}
+                    <FieldError message={errors.contact?.email?.message} />
                 </div>
 
                 <div className="col-span-2">
@@ -76,7 +77,7 @@ export default function Page() {
                     <Textarea placeholder="Enter your address." {...register('contact.address', {
                         required : 'Please enter address.'
                     })} />
-                    {errors.contact?.address && <span className="error">{errors.contact.address.message}</span>}
+                    <FieldError message={errors.contact?.address?.message} />
                 </div>
                 
                 <div>

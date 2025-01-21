@@ -1,4 +1,5 @@
 'use client'
+import { FieldError } from "@/components/field-error";
 import { useFormResult } from "@/lib/form-result.provider";
 import { Button, Label, Select, TextInput } from "flowbite-react";
 import { useForm } from "react-hook-form";
@@ -28,7 +29,7 @@ export default function Page() {
                     <TextInput placeholder="Enter Name" {...register('name', {
                         required : "Please enter your name."
                     })} />
-                    {errors.name?.message && <span className="text-red-400 text-xs">{errors.name?.message}</span>}
+                    <FieldError message={errors.name?.message} />
                 </div>
 
                 <div className="col-start-1">
@@ -36,7 +37,7 @@ export default function Page() {
                     <TextInput placeholder="Enter Phone" type="tel" {...register('phone', {
                         required: "Please enter your phone."
                     })} />
-                    {errors.phone?.message && <span className="text-red-400 text-xs">{errors.phone?.message}</span>}
+                    <FieldError message={errors.phone?.message} />
                 </div>
 
                 <div>
@@ -44,7 +45,7 @@ export default function Page() {
                     <TextInput placeholder="Enter Email" type="email" {...register('email', {
                         required: "Please enter email address."
                     })} />
-                    {errors.email?.message && <span className="text-red-400 text-xs">{errors.gender?.message}</span>}
+                    <FieldError message={errors.email?.message} />
                 </div>
 
                 <div className="col-start-1">
@@ -57,7 +58,7 @@ export default function Page() {
                             <option key={item} value={item}>{item}</option>
                         ))}
                     </Select>
-                    {errors.gender?.message && <span className="text-red-400 text-xs">{errors.gender?.message}</span>}
+                    <FieldError message={errors.gender?.message} />
                 </div>
 
                 <div>
@@ -65,7 +66,7 @@ export default function Page() {
                     <TextInput type="date" {...register('dob', {
                         required : "Please enter date of birth."
                     })} />
-                    {errors.dob?.message && <span className="text-red-400 text-xs">{errors.gender?.message}</span>}
+                    <FieldError message={errors.dob?.message} />
                 </div>
 
                 <div className="col-start-1">
