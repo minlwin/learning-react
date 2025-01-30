@@ -21,6 +21,7 @@ type ProductStoreState = {
 type ProductStoreActions = {
     add : (item : ProductForm) => Product | undefined
     remove : (id : number) => void
+    findById : (id : number) => Product | undefined
 }
 
 export const useProductStore = create(
@@ -39,9 +40,9 @@ export const useProductStore = create(
                 remove : (id) => {
                     set(state => state.products = state.products.filter(product => product.id != id))
                 },
-                nextId : () => {
-                    set(state => state.id += 1)
-                    return get().id
+                findById : (id) => {
+                    const filtered = get().products.filter(a => a.id === id)
+                    return filtered[0]
                 }
             })
         ),
