@@ -60,7 +60,7 @@ function MainLayout({children} : {
           </Toolbar>
         </Container>
 
-        <Drawer open={open} onClose={() => {() => toggleDrawer(false)}} >
+        <Drawer open={open} onClose={() =>  toggleDrawer(false)} >
           <SideMenu onSelect={() => toggleDrawer(false)} />
         </Drawer>
       </AppBar>

@@ -1,8 +1,9 @@
 'use client'
 
-import React, { createContext, useContext, useState } from "react"
+import React, { createContext, useContext, useEffect, useState } from "react"
 import { MenuItemModel } from "../components/side-menu"
-import { Home } from "@mui/icons-material"
+
+const KEY = 'app.material.ui.selected-menu'
 
 type SelectedMenuContextType = {
     menu:MenuItemModel
@@ -14,10 +15,21 @@ const SelectedMenuContext = createContext<SelectedMenuContextType | undefined>(u
 export function SelectedMenuProvider({children} : {children: React.ReactNode}) {
 
     const [menu, setMenu] = useState<MenuItemModel>({
-        name : '',
-        icon: <Home />,
+        name : 'Home',
+        icon: "Home",
         route: '/'
     })
+
+    useEffect(() => {
+        const value = localStorage.getItem(KEY)
+        if(value) {
+            setMenu(JSON.parse(value))
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem(KEY, JSON.stringify(menu))
+    }, [menu])
 
     return (
         <SelectedMenuContext.Provider value={{menu : menu, setMenu : setMenu}}>

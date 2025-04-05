@@ -1,6 +1,6 @@
 'use client'
 
-import { BookTwoTone, CalendarMonth, Email, Key, Payment, PeopleAlt, PeopleOutline, PersonOutline, Settings, ShoppingCart } from "@mui/icons-material";
+import * as MuiIcons from '@mui/icons-material';
 import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -24,11 +24,14 @@ export default function SideMenu({onSelect}: {onSelect: VoidFunction}) {
             </div>
 
             <List dense={true}>
+                <ListItem>
+                    <ListItemButton>Management</ListItemButton>
+                </ListItem>
                 {ManagementMenu.map((menu, index) => (
                     <ListItem key={index} >
                         <ListItemButton onClick={() => navigate(menu)}>
                             <ListItemIcon>
-                                {menu.icon}
+                                {icon(menu.icon)}
                             </ListItemIcon>
                             <ListItemText>{menu.name}</ListItemText>
                         </ListItemButton>
@@ -38,11 +41,14 @@ export default function SideMenu({onSelect}: {onSelect: VoidFunction}) {
             <Divider/>
 
             <List dense={true}>
+                <ListItem>
+                    <ListItemButton>Settings</ListItemButton>
+                </ListItem>
                 {SettingMenu.map((menu, index) => (
                     <ListItem key={index} >
                         <ListItemButton onClick={() => navigate(menu)}>
                             <ListItemIcon>
-                                {menu.icon}
+                                {icon(menu.icon)}
                             </ListItemIcon>
                             <ListItemText>{menu.name}</ListItemText>
                         </ListItemButton>
@@ -56,7 +62,7 @@ export default function SideMenu({onSelect}: {onSelect: VoidFunction}) {
                     <ListItem key={index} >
                         <ListItemButton onClick={() => navigate(menu)}>
                             <ListItemIcon>
-                                {menu.icon}
+                                {icon(menu.icon)}
                             </ListItemIcon>
                             <ListItemText>{menu.name}</ListItemText>
                         </ListItemButton>
@@ -68,36 +74,47 @@ export default function SideMenu({onSelect}: {onSelect: VoidFunction}) {
     )
 }
 
+export const icon = (name:string) => {
+    const MuiIcon = (MuiIcons as any)[name]
+
+    if(MuiIcon) {
+        return <MuiIcon />
+    }
+
+    return null
+}
+
+
 export type MenuItemModel = {
     name: string,
-    icon: React.ReactNode
+    icon: string,
     route: string,
 }
 
 const ManagementMenu:MenuItemModel[] = [
     {
         name: "Course Management",
-        icon: <BookTwoTone />,
+        icon: "BookTwoTone",
         route: '/management/course'
     },
     {
         name: "Class Management",
-        icon: <CalendarMonth />,
+        icon: "CalendarMonth",
         route: '/management/class'
     },
     {
         name: "Payment History",
-        icon: <ShoppingCart />,
+        icon: "ShoppingCart",
         route: '/management/payment'
     },
     {
         name: "Employee Management",
-        icon: <PeopleOutline />,
+        icon: "PeopleOutline",
         route: '/management/employee'
     },
     {
         name: "Student Management",
-        icon: <PeopleAlt />,
+        icon: "PeopleAlt",
         route: '/management/student'
     },
 ]
@@ -105,12 +122,12 @@ const ManagementMenu:MenuItemModel[] = [
 const SettingMenu:MenuItemModel[] = [
     {
         name: "Payment Methods",
-        icon: <Payment />,
+        icon: "Payment",
         route: '/setting/payment-methods'
     },
     {
         name: "General Settings",
-        icon: <Settings />,
+        icon: "Settings",
         route: '/setting/general'
     },
 ]
@@ -118,17 +135,17 @@ const SettingMenu:MenuItemModel[] = [
 const PersonalMenu:MenuItemModel[] = [
     {
         name: "Messages",
-        icon: <Email />,
+        icon: "Email",
         route: '/personal/messages'
     },
     {
         name: "Change Password",
-        icon: <Key />,
+        icon: "Key",
         route: '/personal/change-pass'
     },
     {
         name: "Profile",
-        icon: <PersonOutline />,
+        icon: "PersonOutline",
         route: '/personal/profile'
     },
 ]
