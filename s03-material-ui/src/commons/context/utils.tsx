@@ -1,0 +1,1 @@
+export const KEY_PREFIX = "app.material.ui"

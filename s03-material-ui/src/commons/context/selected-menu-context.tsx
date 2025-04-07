@@ -2,8 +2,9 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { MenuItemModel } from "../components/side-menu"
+import { KEY_PREFIX } from "./utils"
 
-const KEY = 'app.material.ui.selected-menu'
+const KEY = `${KEY_PREFIX}.selected-menu`
 
 type SelectedMenuContextType = {
     menu:MenuItemModel

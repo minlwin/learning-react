@@ -5,6 +5,7 @@ import { Drawer } from "@mui/material";
 import { useState } from "react";
 import { CourseFilter } from "./course-filter";
 import CourseList from "./course-list";
+import CourseEdit from "./course-edit";
 
 export default function CourseManagement() {
 
@@ -29,7 +30,7 @@ export default function CourseManagement() {
             </Drawer>
 
             <Drawer anchor="right" open={openAddNew} onClose={() => setOpenAddNew(false)}>
-                <CourseFilter />
+                <CourseEdit />
             </Drawer>
 
             <section>
