@@ -17,8 +17,8 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path='/first' element={<FirstComponent />} />
           <Route path='/args' element={<PassingArgs />} />
-          <Route path='/conditional' element={<ConditionalRendering />} />
           <Route path='/list' element={<ListItems />} />
+          <Route path='/conditional' element={<ConditionalRendering />} />
         </Routes>
       </div>
     </>
@@ -33,9 +33,9 @@ function NavBar() {
 
         <ul className="navbar-nav">
           <NavItem path='/first' name='First Component' />
-          <NavItem path='/args' name='Arguments' />
-          <NavItem path='/conditional' name='Conditional' />
+          <NavItem path='/args' name='Properties' />
           <NavItem path='/list' name='Rendering List' />
+          <NavItem path='/conditional' name='Conditional' />
         </ul>
       </div>
     </nav>
