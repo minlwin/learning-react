@@ -1,4 +1,4 @@
-import PageTitle from "../utils/page-title";
+import PageTitle from "../../utils/page-title";
 
 export default function ListItems() {
 

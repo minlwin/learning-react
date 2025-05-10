@@ -23,5 +23,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src", "src/pages/conditional/conditional-home.tsx", "src/pages/conditional/conditional-short-and.tsx", "src/pages/conditional/conditional-short-or.tsx", "src/pages/conditional/conditional-ternary.tsx"]
 }
