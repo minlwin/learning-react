@@ -6,8 +6,10 @@ import Regions from './pages/region/list'
 import RegionDetails from './pages/region/details'
 import States from './pages/state/list'
 import StateDetails from './pages/state/details'
+import { StrictMode } from 'react'
 
 createRoot(document.getElementById('root')!).render(
+  <StrictMode>
   <BrowserRouter>
     <Routes>
       <Route path='/' element={<App />}>
@@ -19,4 +21,6 @@ createRoot(document.getElementById('root')!).render(
       </Route>
     </Routes>
   </BrowserRouter>
+
+  </StrictMode>
 )
