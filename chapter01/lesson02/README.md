@@ -1,0 +1,1 @@
+# Lesson 02 : Defining Variables
