@@ -5,40 +5,79 @@
 
 ## 1. Initialize Project
 
+TypeScript ကို Test ပါလုပ်လို့ရတဲ့ Project တစ်ခုကို Low Level ကနေ တည်ဆောက်ဖို့ ဆိုရင် အရင်ဆုံး Node Project တစ်ခုကို တည်ဆောက်ကြရပါမယ်။ 
+
+mkdir Command ဖြင့် Project Directory ကို တည်ဆောက်ပြီး Node Project ဖြစ်အောင် Initialize လုပ်ရမှာ ဖြစ်ပါတယ်။
+
 ```
 mkdir lesson01
 cd lesson01
-npm i -y
+npm init -y
+```
+
+npm init -y Comment ကို Execute လုပ်ပြီးတဲ့ အခါမှာ lesson Directory အတွင်းမှာ package.json File ကို တည်ဆောက်ပေးနိုင်ပြီး Node Prject တစ်ခုအနေနဲ့ ပြင်ဆင်ပေးနိုင်မှာ ဖြစ်ပါတယ်။ 
+
+package.json file ကတော့ အောက်ပါအတိုင်း ရှိနေမှာဖြစ်ပါတယ်။ 
+
+```
+{
+  "name": "lesson1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
 ```
 
 ## 2. Install TypeSript
+
+package.json file ကို Generate လုပ်ပြီးတဲ့ နောက်မှာ TypeScript ကို Developint Environment မှာ အသုံးပြုနိုင်အောင် ပြင်ဆင်သွားရပါမယ်။ 
 
 ```
 npm i --save-dev typescript
 ```
 
+အထက်ပါ Command ကို Execute လုပ်ပြီးတဲ့ အခါမှာ package.json file ဟာ အောက်ပါအတိုင်းပြောင်းလဲသွားမှာ ဖြစ်သလို လိုအပ်တဲ့ Node Modules တွေကိုလဲ Install လုပ်သွားမှာ ဖြစ်ပါတယ်။ 
+
+```
+{
+  "name": "lesson1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
+```
 
 ## 3. Create TypeScript Configuration
+
+Development Dependency အတွင်းမှာ TypeScript ကို ဖြည့်စွက်ပြီးပြီဆိုရင်တော့ အောက်ပါ Command ကို Execute လုပ်ပြီး TypeScript Configuration File ကို Generate လုပ်ပေးကြရမှာ ဖြစ်ပါတယ်။
 
 ```
 npx tsc --init
 ```
 
 
-## 4. Create Source Directory
+## 4. Writing Codes
 
 ```
 mkdir src
 ```
-
-## 5. Install Testing Library
-
-```
-npm i --save-dev jest ts-jest @types/jest
-npx ts-jest config:init
-```
-
-## 6. Create Target 
 
 ```
 export function sayHello(name : string) {
@@ -46,7 +85,14 @@ export function sayHello(name : string) {
 }
 ```
 
-## 7. Create Test File
+## 5. Install Test Dependencies
+
+```
+npm i --save-dev jest ts-jest @types/jest
+npx ts-jest config:init
+```
+
+## 6. Writing Test Code
 
 ```
 import { sayHello } from "./hello"
@@ -56,7 +102,7 @@ test("Hello TypeScript Test", () => {
 })
 ```
 
-## 8. Prepare for Test
+## 7. Prepare for Test
 
 ```
   "scripts": {
