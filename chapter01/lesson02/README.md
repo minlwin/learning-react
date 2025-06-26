@@ -32,5 +32,46 @@ for(var i = 0; i < 10; i ++) {
 console.log(i)
 ```
 
-Declare လုပ်ပြီးသွားတဲ့ အခါမှာ တန်ဖိုးကို မပြောင်းစေလိုတော့တဲ့ Variable တွေ၊ Java မှာဆိုရင် final variable လိုအရာမျိုးတွေကို ရေးသားလိုတဲ့ အခါမှာ const keyword ကို အသုံးပြုပြီး ရေးသားကြရမှာ ဖြစ်ပါတယ်။ 
+Declare လုပ်ပြီးသွားတဲ့ အခါမှာ တန်ဖိုးကို မပြောင်းစေလိုတော့တဲ့ Variable တွေ၊ Java မှာဆိုရင် final variable (Constant) လို Variable မျိုးတွေကို ရေးသားလိုတဲ့ အခါမှာ const keyword ကို အသုံးပြုပြီး ရေးသားကြရမှာ ဖြစ်ပါတယ်။ 
 
+Constant Variable တွေဟာ Declare လုပ်ပြီးတဲ့နောက်မှာ တန်ဖိုးကို ပြောင်းလို့မရနိုင်တဲ့အတွက် Variable ကို Declare လုပ်တဲ့အခါမှာ တန်ဖိုးကို သတ်မှတ်ပေးဖို့လိုအပ်ပါတယ်။ 
+
+```
+// Declaring Constant
+const BASE_URL:string = 'http://localhost:8080'
+```
+
+## Type Inference
+
+အခြေခံအားဖြင့်တော့ TypeScript မှာ Variable တွေကို Declare လုပ်တဲ့အခါမှာ Type ကို သတ်မှတ်ရေးသားပေးကြရမှာ ဖြစ်ပါတယ်။ ဒါပေမဲ့ Variable ကို Declare လုပ်တဲ့အခါမှာ တန်ဖိုးကို သတ်မှတ်ရေးသားထားပါက တန်ဖိုးကို ကြည့်ပြီး Type ကို ခန့်မှန်းနိုင်တဲ့အတွက် Type ကို မရေးသားရင်လဲ ရပါတယ်။ 
+
+```
+// Type of TYPESCRIPT is string
+const TYPESCRIPT = "TypeScript"
+
+// Type of result is boolean
+let result = false
+
+// Type of counter is number
+var counter = 0
+```
+
+## Basic Data Types
+
+TypeScript ဟာ Super Sert of JavaScript ဆိုတဲ့အတိုင်း JavaScript Type တွေအားလုံးဟာ TypeScript မှာ အသုံးပြုလို့ရပါတယ်။ ထို့အပြင် TypeScript က ထပ်မံဖြည့်စွက်ထားတဲ့ Basic DataType တွေလဲ ရှိသလို ရှိပြီးသား Type တွေကို လိုအပ်သလို ပြောင်းလဲနိုင်အောင် ပြင်ဆင်ပေးထားတဲ့ Utility Types တွေလဲ ရှိကြပါတယ်။
+
+### JavaScript Types
+
+| Type    | Sample Value       |
+|---------|--------------------|
+| boolean | true, false        |
+| string  | "value" or 'value' | 
+| number  | 0, -0, 0.0, -0.001 |
+
+#### Truthy & Falsy
+
+#### Array
+
+### TypeScript Specific Type
+
+## Utility Types
