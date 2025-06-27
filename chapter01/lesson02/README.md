@@ -70,7 +70,54 @@ TypeScript ဟာ Super Sert of JavaScript ဆိုတဲ့အတိုင်�
 
 #### Truthy & Falsy
 
+JavaScript Language မှာ Java နဲ့ လုံးဝမတူတာ တွေရှိတတ်ကြပါတယ်။ အဲ့ဒီအထဲမှာ Boolean Expression လဲ တစ်ခုအပါအဝင်ဖြစ်ပါတယ်။ 
+
+Java မှာတော့ Boolean Type တွေနှင့် Boolean တန်ဖိုးကို ရရှိစေနိုင်တဲ့ Expression တွေပဲ Boolean Expression မှာ အသုံးပြုလို့ရပါတယ်။ ဥပမာအားဖြင့် Method တစ်ခုရဲ့ Return Type ဟာ Boolean ဖြစ်နေတာတို့၊ Variable ရဲ့ Type ဟာ Boolean ဖြစ်နေတာတို့ Relational Expression တွေရဲ့ ရလဒ်ဟာ Boolean ဖြစ်နေတာတို့ကိုပဲ Boolean Expression ကို အသုံးပြုနိုင်တာ ဖြစ်ပါတယ်။ 
+
+JavaScript မှာတော့ အချို့သော တန်ဖိုးတွေဟာ False နှင့် True ကို ဆုံးဖြတ်ပေးနိုင်ပါတယ်။ 
+
+False ဖြစ်စေနိုင်တဲ့ တန်ဖိုးတွေကတော့ အောက်ပါအတိုင်း ဖြစ်ကြပါတယ်။ 
+
+| Evaluate as False | Value                |
+|-------------------|----------------------|
+|Boolean False      |false                 |
+|Zero               |0, -0, 0.0, -0.0      |
+|Empty String       |"", ''                |
+|No Value           |null                  |
+|Uninitialized      |undefined             |
+|Not a number       |NaN                   |
+
+TypeScript မှာ JavaScript Code တွေအားလုံးဟာ အသုံးပြုလို့ရတဲ့ အတွက် Bollean Type, Boolean Type ကို Return ပြန်တဲ့ Function တွေ၊ Boolean Expression တွေသာမက String, Number နှင့် အခြားသော Type များကိုလဲ Boolean Expression အနေနဲ့ အသုံးပြုနိုင်မှာ ဖြစ်ပါတယ်။ 
+
+```
+export function isFalse(input:any):boolean {
+    if(input) {
+        return false
+    }
+    return true
+}
+```
+ဒါကြောင့် အထက်ပါ နမူနာထဲမှာ ရေးထားတဲ့ အတိုင်း any type ဖြစ်တဲ့ input ကို if statement ရဲ့ Boolean Expression အနေနဲ့ အသုံးပြုနိုင်တာ ဖြစ်ပါတယ်။
+
 #### Array
+
+Array နဲ့ပတ်သက်ပြီး Java Basic မှာလဲ လေ့လာခဲ့ပြီးဖြစ်ပါတယ်။ Array တွေဟာ အခြေခံအားဖြင့် တစ်ခုထက်မကသော Element တွေကို Index ဖြင့်မှတ်ပြီး သိမ်းပေးထားနိုင်ပြီး Index ဖြင့် Array ထဲမှာ သိမ်းထားတဲ့ Element တွေကို ပြန်ပြီး ထုတ်ယူ အသုံးပြုနိုင်ပါတယ်။ 
+
+```
+// Define an array
+const DAY_OF_WEEKS:string[] = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+
+export function getDay(index:number):string {
+    // Accessing Element with index
+    return DAY_OF_WEEKS[index]
+}
+```
+
+TypeScript ရဲ့ Array တွေဟာလဲ Java မှာလိုပဲ Element တွေကို Index Number တွေနဲ့ Access လုပ်နိုင်ကြပါတယ်။ 
+
+ဒါပေမဲ့ Java မှာက မရှိတဲ့ Index Number ဖြင့် Access လုပ်မိပါက ArrayIndexOutOfBoundException ကို ဖြစ်စေမှာ ဖြစ်ပေမဲ့ TypeScript မှာတော့ Exception ကို မဖြစ်စေပဲ undefined ကို ရရှိစေမှာ ဖြစ်ပါတယ်။ 
+
+ဒီအချက်က Java ရဲ့ Array ဟာ Fix Size Array ဖြစ်ပြီး TypeScript ရဲ့ Array ဟာ Dynamic Size Array ဖြစ်တယ်ဆိုတာကို သိသာစေတဲ့ အချက်ဖြစ်ပါတယ်။ 
 
 ### TypeScript Specific Type
 
