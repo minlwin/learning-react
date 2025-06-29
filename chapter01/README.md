@@ -9,7 +9,9 @@ React ဟာ နောက်ပိုင်း Function Programming ဘက်က
 TypeScript ဖြင့် OOP ကို လေ့လာလိုပါက Official Document တွေကို သွားရောက် လေ့လာစေလိုပါတယ်။ [TypeScript Official Web Site](https://www.typescriptlang.org/)
 
 ### Contents
-- Lesson 1 : Creating TypeScript Project
-- Lesson 2 : Defining Variables
-- Lesson 3 : Functions
-- Lesson 4 : Classes and Interfaces
+| Lessons  | Title                       |
+|----------|-----------------------------|
+| Lesson 1 | Creating TypeScript Project |
+| Lesson 2 | Defining Variables          |
+| Lesson 3 | Functions                   |
+| Lesson 4 | Classes and Interfaces      |

@@ -119,6 +119,162 @@ TypeScript ရဲ့ Array တွေဟာလဲ Java မှာလိုပဲ E
 
 ဒီအချက်က Java ရဲ့ Array ဟာ Fix Size Array ဖြစ်ပြီး TypeScript ရဲ့ Array ဟာ Dynamic Size Array ဖြစ်တယ်ဆိုတာကို သိသာစေတဲ့ အချက်ဖြစ်ပါတယ်။ 
 
+##### Creating Array
+
+```
+test("Array Creation", () => {
+    // Expression
+    let array:number[] = [1, 2, 3]
+    // Verify array state
+    expect(array).toEqual([1, 2, 3])
+
+    // Array Constructor
+    array = new Array(3)
+    // Verify array state
+    expect(array).toEqual([undefined, undefined, undefined])
+
+    // Array.of() factory function
+    array = Array.of(1, 2, 3, 4, 5)
+    // Verify array state
+    expect(array).toEqual([1, 2, 3, 4, 5])
+
+    // Array.from() factory function
+    array = Array.from({length : 3}, (_, i) => i + 1)
+    // Verify array state
+    expect(array).toEqual([1, 2, 3])
+})
+```
+
+##### Accessing Elements
+```
+test('Accessing Elements with Index', () => {
+    // Array Declaration
+    let numbers = Array.from({length : 5}, (_, index) => index + 1)
+
+    // Verify array state
+    expect(numbers).toEqual([1, 2, 3, 4, 5])
+
+    // Get Element with index 0
+    let firstElement = numbers[0]
+
+    // Verify Result
+    expect(firstElement).toBe(1)
+
+    // Get Element with last index
+    let lastElement = numbers[numbers.length - 1]
+    // Verify Result
+    expect(lastElement).toBe(5)
+
+    // Set Element with Index Number
+    numbers[0] = 10
+    numbers[numbers.length - 1] = 0
+    // Verify array state
+    expect(numbers).toEqual([10, 2, 3, 4, 0])
+})
+```
+##### Adding and Removing Elements
+Java မှာတော့ Array တွေဟာ Fixed-Length Array တွေဖြစ်တဲ့အတွက် Array Object တစ်ခုကို တည်ဆောက်ပြီးရင် Length ကို ပြောင်းလို့မရတော့ပါဘူး။ ဒါပေမဲ့ JavaScript နဲ့ TypeScript Array တွေကတော့ Dynamic Array တွေဖြစ်တဲ့အတွက် Element တွေကို ထပ်ပြီးတိုးလို့ရနိုင်တဲ့အတွက် Java ရဲ့ List နဲ့ တူတယ်လို့ ပြောလို့ရနိုင်ပါတယ်။ 
+
+ဒါ့အပြင် Element တွေကို ရှေ့ကနေကော နောက်ကနေပါ Add & Remove လုပ်လို့ရပြီး Double-Ended Queue လိုဖြစ်နေတဲ့အတွက် Queue အနေနဲ့ကောအသလုံးပြုနိုင်သလို Stack အနေနဲ့ပါ အသုံးပြုနိုင်မှာ ဖြစ်ပါတယ်။ 
+
+###### Adding Elements
+
+```
+test("Adding Elements to an array", () => {
+    // Declare an empty array
+    const deque:number[] = []
+
+    // Add an element to the end (like a stack push)
+    deque.push(1)
+
+    // Add an element to the front (like a queue unshift)
+    deque.unshift(9)
+    
+    // Verify the result
+    expect(deque).toEqual([9, 1])
+})
+```
+
+###### Removing Elements
+
+```
+test("Removing elements from an array", () => {
+    // Declare an array 
+    const deque = [1, 2, 3, 4, 5]
+
+    // Removing element from the end
+    const lastElement = deque.pop()
+
+    // Verify last element and new state of array
+    expect(lastElement).toBe(5)
+    expect(deque).toEqual([1, 2, 3, 4])
+
+    // Remove element from the start
+    const firstElement = deque.shift()
+
+    // Verify last element and new state of array
+    expect(firstElement).toBe(1)
+    expect(deque).toEqual([2, 3, 4])
+})
+```
+
+###### Deleting Elements
+
+```
+test("Delete elements from an array", () => {
+
+    // Declare an array
+    const array = [1, 2, 3, 4, 5]
+
+    // delete 2 elements from index 1
+    array.splice(1, 2)
+
+    // Verify array state
+    expect(array).toEqual([1, 4, 5])
+})
+```
+###### Inserting Elements
+
+```
+test("Insert elements to an array", () => {
+    // Declare an array
+    const array = [1, 2, 3, 4, 5]
+
+    // Insert 10, 11 from index 1
+    array.splice(1, 0, 10, 11)
+
+    // Verify array state
+    expect(array).toEqual([1, 10, 11, 2, 3, 4, 5])
+})
+```
+###### Replacing Elements
+
+```
+test("Replace elements to an array", () => {
+    // Declare an array
+    const array = [1, 2, 3, 4, 5]
+
+    // Delete 2 elements form index 1 and insert 10, 11 from index 1
+    array.splice(1, 2, 10, 11)
+
+    // Verify array state
+    expect(array).toEqual([1, 10, 11, 4, 5])
+})
+```
+
+##### Query Method of an Array
+
+##### Sorting and Reversing 
+
+##### Non-Muntating (Returning new array)
+
+##### Reduction & Aggregation
+
+##### Utility
+
+
+
+
 ### TypeScript Specific Type
 
 ## Utility Types
