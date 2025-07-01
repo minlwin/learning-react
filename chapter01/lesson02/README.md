@@ -150,13 +150,11 @@ test("Array Creation", () => {
 test('Accessing Elements with Index', () => {
     // Array Declaration
     let numbers = Array.from({length : 5}, (_, index) => index + 1)
-
     // Verify array state
     expect(numbers).toEqual([1, 2, 3, 4, 5])
 
     // Get Element with index 0
     let firstElement = numbers[0]
-
     // Verify Result
     expect(firstElement).toBe(1)
 
@@ -176,6 +174,14 @@ test('Accessing Elements with Index', () => {
 Java မှာတော့ Array တွေဟာ Fixed-Length Array တွေဖြစ်တဲ့အတွက် Array Object တစ်ခုကို တည်ဆောက်ပြီးရင် Length ကို ပြောင်းလို့မရတော့ပါဘူး။ ဒါပေမဲ့ JavaScript နဲ့ TypeScript Array တွေကတော့ Dynamic Array တွေဖြစ်တဲ့အတွက် Element တွေကို ထပ်ပြီးတိုးလို့ရနိုင်တဲ့အတွက် Java ရဲ့ List နဲ့ တူတယ်လို့ ပြောလို့ရနိုင်ပါတယ်။ 
 
 ဒါ့အပြင် Element တွေကို ရှေ့ကနေကော နောက်ကနေပါ Add & Remove လုပ်လို့ရပြီး Double-Ended Queue လိုဖြစ်နေတဲ့အတွက် Queue အနေနဲ့ကောအသလုံးပြုနိုင်သလို Stack အနေနဲ့ပါ အသုံးပြုနိုင်မှာ ဖြစ်ပါတယ်။ 
+
+| Method        | Description                    |
+|---------------|--------------------------------|
+| push() | နောက်ဆုံးနေရာကနေ Element တို့ကို ဖြည့်စွက်နိုင်ပါတယ် |
+| pop() | နောက်ဆုံးနေရာက Element ကို ဖြုတ်ထုတ်နိုင်ပါတယ် |
+| unshift() | ရှေ့ဆုံးနေရာကနေ Element တို့ကို ဖြည့်စွက်နိုင်ပါတယ် |
+| shift() | ရှေ့ဆုံးနေရာက Element ကို ဖြုတ်ထုတ်နိုင်ပါတယ် |
+| splice() | Index No သတ်မှတ်ပြီး Element တွေကို Delete, Insert ပြုလုပ်နိုင်ပါတယ် |
 
 ###### Adding Elements
 
@@ -263,16 +269,188 @@ test("Replace elements to an array", () => {
 ```
 
 ##### Query Method of an Array
+| Method        | Description                    |
+|---------------|--------------------------------|
+| find()        | Condition နှင့်ကိုက်ညီတဲ့ First Element ကို ရှာပေးနိုင်ပါတယ် | 
+| findIndex()   | Condition နှင့်ကိုက်ညီတဲ့ First Index Number ကို ရှာပေးနိုင်ပါတယ် |
+| indexOf()     | Element တစ်ခုရဲ့ First Index Number ကို ရှာပေးနိုင်ပါတယ် |
+| lastIndexOf() | Element တစ်ခုရဲ့ Last Index Number ကို ရှာပေးနိုင်ပါတယ် |
+| includes()    | Element တစ်ခုဟာ Array ထဲမှာ ပါဝင်မှုရှိမရှိကို စစ်ဆေးပေးနိုင်ပါတယ် |
+| some()        | အချို့ Element တွေဟာ Condition တစ်ခုနဲ့ ကိုက်ညီမှုရှိမရှိကို စစ်ဆေးပေးနိုင်ပါတယ် |
+| every()       | Element တွေအားလုံးဟာ Condition တစ်ခုနဲ့ ကိုက်ညီမှုရှိမရှိကို စစ်ဆေးပေးနိုင်ပါတယ် |
+
+###### Find First Element
+```
+test("Find first element in an array", () => {
+    const array = [1, 2, 3, 4, 5, 6, 7, 1, 3]
+
+    // Find First Even Element
+    let firstEven = array.find(a => a % 2 == 0)
+
+    // Verify Result
+    expect(firstEven).toBe(2)
+})
+```
+
+###### Find First Index
+```
+test("Find first index in an array", () => {
+    const array = [1, 2, 3, 4, 5, 6, 7, 1, 3]
+
+    // Find First Even Element
+    let firstEven = array.findIndex(a => a % 2 == 0)
+
+    // Verify Result
+    expect(firstEven).toBe(1)
+})
+```
+
+###### Find First Index of an element
+```
+test("Find first index of an element", () => {
+    const array = [1, 2, 3, 4, 5, 6, 7, 1, 3]
+
+    // Find first index of 3
+    let firstIndex = array.indexOf(3)
+
+    // Verify Result
+    expect(firstIndex).toBe(2)
+})
+```
+
+###### Find Last Index of an element
+```
+test("Find last index of an element", () => {
+    const array = [1, 2, 3, 4, 5, 6, 7, 1, 3]
+
+    // Find first index of 3
+    let lastIndex = array.lastIndexOf(3)
+
+    // Verify Result
+    expect(lastIndex).toBe(8)
+})
+```
+
+###### Verify contains or not
+```
+test("Contains or Not", () => {
+    const array = [1, 2, 3, 4, 5]
+
+    // Check 1 contains in array
+    let result = array.includes(1)
+    // Verify Result
+    expect(result).toBe(true)
+
+    // Check 1 contains in array from index 1
+    result = array.includes(1, 1)
+    // Verify Result
+    expect(result).toBe(false)
+})
+```
+
+###### Verify matching some elements
+```
+   // Verify Result
+    expect(result).toBe(true)
+
+    // Define unmatched array
+    const unMatchArray = [1, 2, 4]
+    
+    // Check some element is divided by 3
+    result = unMatchArray.some(a => a % 3 == 0)
+    // Verify Result
+    expect(result).toBe(false)
+})
+```
+
+###### Verify matching all elements
+```
+test("All match condition", () => {
+    // Define match array
+    const matchArray = [3, 6, 9]
+
+    // Check every element is divided by 3
+    let result = matchArray.every(a => a % 3 == 0)
+    // Verify Result
+    expect(result).toBe(true)
+
+    // Define unmatched array
+    const unMatchArray = [1, 2, 3]
+    
+    // Check every element is divided by 3
+    result = unMatchArray.every(a => a % 3 == 0)
+    // Verify Result
+    expect(result).toBe(false)
+})
+```
 
 ##### Sorting and Reversing 
+| Method        | Description                    |
+|---------------|--------------------------------|
+| sort() | Array ထဲက Element တွေကို Sort လုပ်ပေးနိုင်ပါတယ် | 
+| reverse() | Array ထဲက Element တွေရဲ့ Order ကို ပြောင်းပြန်လုပ်ပေးနိုင်ပါတယ် |
 
-##### Non-Muntating (Returning new array)
+###### Natural Sorting
+```
+test("Natural Ordering Sort", () => {
+
+    // Define an array
+    const array = [3, 1, 4, 5, 9, 2]
+
+    // Sorting 
+    const result = array.sort()
+
+    // Verify Result
+    expect(result).toEqual([1, 2, 3, 4, 5, 9])
+    // Verify Original array has been changed
+    expect(array).toEqual([1, 2, 3, 4, 5, 9])
+})
+```
+
+###### Custom Sorting
+```
+test("Custom Ordering Sort", () => {
+
+    // Define an array
+    const array = [3, 1, 4, 5, 9, 2]
+
+    // Sorting 
+    const result = array.sort((a, b) => b - a)
+
+    // Verify Result
+    expect(result).toEqual([9, 5, 4, 3, 2, 1])
+    // Verify Original array has been changed
+    expect(array).toEqual([9, 5, 4, 3, 2, 1])
+})
+```
+
+###### Reversig Order
+```
+test("Reversing an array", () => {
+    // Define an array
+    const array = [9, 5, 4, 3, 2, 1]
+
+    // Reverse
+    const result = array.reverse()
+
+    // Verify Result
+    expect(result).toEqual([1, 2, 3, 4, 5, 9])
+    // Verify Original array has been changed
+    expect(array).toEqual([1, 2, 3, 4, 5, 9])
+})
+```
+
+##### Non-Mutating (Returning new array)
+| Method        | Description                    |
+|---------------|--------------------------------|
 
 ##### Reduction & Aggregation
+| Method        | Description                    |
+|---------------|--------------------------------|
 
 ##### Utility
-
-
+| Method        | Description                    |
+|---------------|--------------------------------|
 
 
 ### TypeScript Specific Type
