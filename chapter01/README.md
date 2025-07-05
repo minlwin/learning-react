@@ -1,4 +1,4 @@
-# Chapter 01 : TypeScript for React
+# Chapter 1 : TypeScript for React
 
 ဒီသင်ခန်းစာကတော့ Java ကို Spring အထိလေ့လာပြီးတဲ့သူ တစ်ယောက်က React ကို လေ့လာဖို့အတွက် ရည်ရွယ်ပြီး ရေးသားထားပါတယ်။ 
 

@@ -9,10 +9,10 @@ TypeScript ကိုပဲအသုံးပြုသွားမှာ ဖြ�
 
 | Chapter | Title |
 |--------|-------|
-| Chapter 1  | TypeScript for React |
-| Chapter 2  | Building UI with React Components |
-| Chapter 3  | Handling Events |
-| Chapter 4  | State Management |
+| [Chapter 1](chapter01/README.md)  | TypeScript for React |
+| [Chapter 2](chapter02/README.md)  | Building UI with React Components |
+| [Chapter 3](chapter03/README.md)  | Handling Events |
+| [Chapter 4](chapter04/README.md)  | Component States |
 | Chapter 5  | Step Outside of React |
 | Chapter 6  | React Hook Form |
 | Chapter 7  | REST Client (Axios) |
