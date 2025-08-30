@@ -153,10 +153,90 @@ TypeScript Language မှာရှိပြီးသား Type တွေကိ
 | Type | Descirption |
 |------|-------------|
 |Readonly&lt;Type&gt;|Properties အားလုံးကို Read Only Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်|
-|Partial&lt;Type&gt; |Properties အားလုံးကို Optional Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်| 
 |Required&lt;Type&gt;|Properties အားလုံးကို Required Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်|
-|Pick&lt;Type, Keys&gt;|
-|Omit&lt;Type, Keys&gt;|
-|Record&lt;Key, Type&gt;|
-|Exclude&lt;UnionType, ExcludeMembers&gt;|
-|Extract&lt;Type, Union&gt;|
+|Partial&lt;Type&gt; |Properties အားလုံးကို Optional Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်| 
+|Record\<Key, Type\>|
+|Pick\<Type, Keys\>|
+|Omit\<Type, Keys\>|
+|Exclude\<UnionType, ExcludeMembers\>|
+|Extract\<Type, Union\>|
+
+[More About Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+
+### Readonly\<Type\>
+Properties အားလုံးကို Read Only Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်
+```
+type User = {
+    name: string
+    phone: string
+    email: string
+}
+
+const user:User = {
+    name: "Aung Aung",
+    phone: "0917181716",
+    email: "aung@gmail.com"
+}
+
+// Properties of user can modify by default
+user.name = "Thidar"
+
+const readOnlyUser:Readonly<User> = user
+
+// Error : 
+// Cannot assign to 'name' because it is a read-only property.ts(2540)
+readOnlyUser.name = "Some Name"
+```
+
+### Required\<Type\>
+Properties အားလုံးကို Required Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်
+```
+type LoginForm = {
+    username?: string
+    password?: string
+}
+
+// OK
+const form:LoginForm = {username: "thidar"}
+
+// Error :
+// All properties from LoginForm are required
+const requiredForm:Required<LoginForm> = {username: "thidar"}
+```
+
+### Partial\<Type\>
+Properties အားလုံးကို Optional Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်
+```
+export type User = {
+    id: number
+    name: string
+    phone: string
+    email: string
+}
+
+export function updateUser(
+    user:User, 
+    fieldToUpdate:Partial<User>) {
+    return {...user, ...fieldToUpdate}
+}
+```
+updateUser function ရဲ့ ဒုတိယ Parameter ရဲ့ Type ကို Partial\<User\> အဖြစ် အသုံးပြုခြင်းအားဖြင့် User ရဲ့ Properties ထဲက တစ်စိတ်တစ်ပိုင်းသာပါတဲ့ Object တွေကို ဒုတိယ Parameter နေရာမှာ အသုံးပြုနိုင်မှာ ဖြစ်ပါတယ်။ 
+
+```
+test("Using Partial Test", () => {
+    const user:User = {
+        id: 1,
+        name: "Aung Aung",
+        phone: "091818171",
+        email: "aung@gmail.com"
+    }
+
+    const result = updateUser(user, {phone: "0917171717"})
+    expect(result).toEqual({
+        id: 1,
+        name: "Aung Aung",
+        phone: "0917171717",
+        email: "aung@gmail.com"
+    })
+})
+```
