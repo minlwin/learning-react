@@ -137,10 +137,26 @@ TypeScript မှာ JavaScript ရဲ့ Data Type တွေကိုလဲ အ
 
 | Type | Descirption |
 |------|-------------|
-|Turple|
-|any|
-|unknown|
-|void|
-|never|
+|Any & Unknown|Type Check Mechanism ကနေ Escape လုပ်ပေးနိုင်တဲ့ Type တွေ ဖြစ်ကြပါတယ်|
+|Void & Never|Return Type အနေနှင့် အသုံးပြုနိုင်တဲ့ Type တွေဖြစ်ကြပါတယ်|
+|Turples|Array တွေမှာ Length ကို သတ်မှတ်ပြီး Index အလိုက် Type တွေကို သတ်မှတ်နိုင်ပါတယ်|
+|Literals Types| Literals တွေအားလုံးကို Type အနေနှင့်အသုံးပြုနိုင်ပါတယ်|
+|Function Types |Function တွေကို Value အနေနဲ့ အသုံးပြုနိုင်တဲ့ အတွက် Type တွေကို သတ်မှတ်နိုင်ပါတယ်|
+|Enum Type | Java ရဲ့ Enum တွေလိုပဲ Constant တွေကို သတ်မှတ် အသုံးပြုနိုင်ပါတယ်|
+|Interface Type| Object တစ်ခုရဲ့ Shape ကို သတ်မှတ်ပေးနိုင်ပါတယ်|
+|Union & Intersection | ရှိပြီးသား Type တွေကို တွဲဖက်ပြီး Type တွေကို သတ်မှတ်ပေးနိုင်ပါတယ်|
 
 ## Utility Types
+
+TypeScript Language မှာရှိပြီးသား Type တွေကို ပုံစံပြောင်းပြီး အသုံးပြုနိုင်ဖို့အတွက် Utility Type တွေကို ပြင်ဆင်ပေးထားပါတယ်။ 
+
+| Type | Descirption |
+|------|-------------|
+|Readonly&lt;Type&gt;|Properties အားလုံးကို Read Only Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်|
+|Partial&lt;Type&gt; |Properties အားလုံးကို Optional Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်| 
+|Required&lt;Type&gt;|Properties အားလုံးကို Required Properties အဖြစ်ပြောင်းပေးနိုင်ပါတယ်|
+|Pick&lt;Type, Keys&gt;|
+|Omit&lt;Type, Keys&gt;|
+|Record&lt;Key, Type&gt;|
+|Exclude&lt;UnionType, ExcludeMembers&gt;|
+|Extract&lt;Type, Union&gt;|

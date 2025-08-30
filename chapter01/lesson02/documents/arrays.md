@@ -494,14 +494,93 @@ test("Flattening and mapping Array Elements", () => {
 
 | Method        | Description                    |
 |---------------|--------------------------------|
-| reduce()
-| reduceRight()
+| reduce()      | Array အတွင်းရှိ Element တွေကို အစကနေ တစ်ခုပြီး တစ်ခု Reduct လုပ်ပြီး တန်ဖိုးတစ်ခုကို ထုတ်ယူပေးနိုင်ပါတယ်
+| reduceRight() | Array အတွင်းရှိ Element တွေကို နောက်ဆုံးကနေ တစ်ခုပြီး တစ်ခု Reduct လုပ်ပြီး တန်ဖိုးတစ်ခုကို ထုတ်ယူပေးနိုင်ပါတယ်
 
+### Reducing Array
+```
+test("Reducing Test", () => {
+    // Array To Reduce
+    const array:string[] = ["1", "2", "3", "4"]
+    
+    // Reducing Array
+    const result = array.reduce((prev, current) => prev + current)
+
+    // Check Result
+    expect(result).toBe("1234")
+})
+```
+
+### Reducing Array from Right Side
+```
+test("Reducing Array from Right Side", () => {
+     // Array To Reduce
+    const array:string[] = ["1", "2", "3", "4"]
+    
+    // Reducing Array
+    const result = array.reduceRight((prev, current) => prev + current)
+
+    // Check Result
+    expect(result).toBe("4321")   
+})
+```
 
 ## Utility
 
-| Method        | Description                    |
-|---------------|--------------------------------|
-| join()
-| toString()
-| Array.isArray()
+| Method         | Description                    |
+|----------------|--------------------------------|
+| join()         |Array Element များကို Comma Seperated String တစ်ခုအဖြစ် တည်ဆောက်ပေးနိုင်ပါတယ်|
+| toString()     |Array Object ကို String အဖြစ်ပြောင်းပေးနိုင်ပါတယ်|
+| Array.isArray()|Variable တစ်ခုဟာ Array ဟုတ်မဟုတ်ကို စစ်ပေးနိုင်ပါတယ်|
+
+### Joining Array
+```
+test("Joining Array Test", () => {
+    // Input
+    const array = [1, 2, 3, 4]
+
+    // Join Array
+    const result = array.join()
+
+    // Check Result
+    expect(result).toBe("1,2,3,4")
+})
+```
+
+### Joining Array with specific separator
+```
+test("Joining Array with Separator Test", () => {
+    // Input
+    const array = [1, 2, 3, 4]
+
+    // Join Array
+    const result = array.join("-")
+
+    // Check Result
+    expect(result).toBe("1-2-3-4")
+})
+```
+
+### Array to String
+```
+test("Array to String Test", () => {
+    // Input
+    const array = [1, 2, 3, 4]
+
+    // Join Array
+    const result = array.toString()
+
+    // Check Result
+    expect(result).toBe("1,2,3,4")
+})
+```
+
+### Check Array or Not
+```
+test("Check Array or Not", () => {
+    // Test Array
+    expect(Array.isArray([1, 2, 3])).toBe(true)
+    // Test Not Array
+    expect(Array.isArray({length : 0})).toBe(false)
+})
+```
